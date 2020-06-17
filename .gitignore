@@ -4,3 +4,5 @@
 *.csv
 *.root
 *.evt
+*.jpg
+*.h5
