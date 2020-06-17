@@ -1,0 +1,3 @@
+command to convert multiple .jpg files into a single .pdf
+sudo apt-get install imagemagick
+ convert *.jpg pictures.pdf	

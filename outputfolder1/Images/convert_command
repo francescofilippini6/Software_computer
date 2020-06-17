@@ -1,0 +1,5 @@
+command to convert multiple .jpg files into a single .pdf
+sudo apt-get install imagemagick
+convert *.jpg pictures.pdf	
+to download to local resources
+scp ffilippi@cca.in2p3.fr:/sps/km3net/users/ffilippi/ML/outputfolder1/Images/pictures.pdf .

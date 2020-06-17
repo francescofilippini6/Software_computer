@@ -1,0 +1,10 @@
+[random_numbers]
+
+train_files = [
+    "numuCC_hist.h5",
+]
+
+validation_files = [
+    "test_hist.h5",
+]
+
