@@ -8,5 +8,5 @@ bin_edges_list = [
 fb = FileBinner(bin_edges_list) #,det_file="KM3NeT_00000042_00008494.detx")
 infiles=['/sps/km3net/users/ffilippi/ML/test.h5','/sps/km3net/users/ffilippi/ML/numuCC.h5']
 #fb.run('test.h5','outfile3333.h5')
-fb.run_multi(infiles,'/sps/km3net/users/ffilippi/ML/outputfolder4',True)
+fb.run_multi(infiles,'/sps/km3net/users/ffilippi/ML/outputfolder',True)
 
