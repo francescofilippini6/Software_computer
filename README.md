@@ -10,6 +10,9 @@ The KM3NeT/ARCA detector is composed, in its final configuration of 230 strings 
 The main feature of this work is the training of a CNN with a single string detector MonteCarlo files and then compare its performances w.r.t. the usual algorithms applied for the muon reconstruction procedure.
 The steps required for the pre-processing of the data are:
 
-``` tohdf5 -o file.h5 /pathToMCFiles @ CC-IN2P3/
-calibrate file.h5 /pathToDetectorFile/detectorfile.detx```
+``` tohdf5 -o file.h5 /pathToMCFiles @ CC-IN2P3/```
+
+then the calibration of the MonteCarlo files with the right detector file:
+
+```calibrate file.h5 /pathToDetectorFile/detectorfile.detx```
 
