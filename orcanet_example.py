@@ -12,13 +12,16 @@ def make_dummy_model():
     """
     Build and compile a small dummy model.
     """
-
-    input_shape = (18,299)
+    #batch size=number of samples in the network, 
+    #img dimensions, last parameter (RGB)
+    input_shape = (2243,18,299,3)
 
     inp = Input(input_shape, name="random_numbers")
+    
+
     x = Dense(10)(inp)
     
-    outp = Dense(1, name="sum")(x)
+    outp = Dense(2, name="sum")(x)
 
     model = Model(inp, outp)
     model.compile("sgd", loss="mae")
