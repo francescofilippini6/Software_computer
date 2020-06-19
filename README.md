@@ -1,5 +1,13 @@
 # Software and computing project
-Use and development of libraries implemented by KM3NeT collaboration for Machine Learning. Build a CNN for discrimination between muons and background. \\
+Use and development of libraries implemented by KM3NeT collaboration for Machine Learning. Build a CNN for discrimination between muons and background:
+
+https://git.km3net.de/ml/OrcaSong
+
+
+https://git.km3net.de/ml/OrcaNet
+
+
+The main feature of this work is the training of the algorithm on a single string detector 
 The possible application of th
 
 ##--------------------Orcasong-----------------------
