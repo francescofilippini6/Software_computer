@@ -1,5 +1,5 @@
 # Software and computing project
-Use and development of libraries implemented by KM3NeT collaboration for Machine Learning. Build a CNN for discrimination between muons and background:
+Use and development of libraries implemented by KM3NeT collaboration for Machine Learning. Build of a CNN for discrimination between muons and environmental background. Further informations:
 
 https://git.km3net.de/ml/OrcaSong
 
@@ -16,3 +16,10 @@ then the calibration of the MonteCarlo files with the right detector file:
 
 ```calibrate file.h5 /pathToDetectorFile/detectorfile.detx```
 
+At this point is possible to built the image of the event combining togheter the positional informations of the hit with its arrival time. Particular attention must be paid in the right choice of the binning intervals.
+
+Possibility of evaluate also a new type of network, Graph Neaural Network, based on the ParticleNet architecture.This possibility was introduced recently by the work of other KM3NeT members and there is still an open window to bring that framework from KM3NeT/ORCA also to KM3NeT/ARCA. 
+
+Further documentation can be found at:
+https://arxiv.org/abs/1902.08570
+https://arxiv.org/abs/2004.08254
