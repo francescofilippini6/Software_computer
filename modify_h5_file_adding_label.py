@@ -11,9 +11,10 @@ import scipy.misc
 from PIL import Image
 km3pipe.style.use("km3pipe")
 
+
 #to read the x group in the h5 file
 def printfile():
-    with h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder/numuCC_hist.h5','r') as hdf:
+    with h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder/mupage_hist.h5','r') as hdf:
         base_items = list(hdf.items())
         print('Items in the base directory', base_items)
         g2 = np.array(hdf.get('x'))
@@ -43,11 +44,11 @@ def newfile(g2):
     appending howevert the normalized one
     """ 
     nevt=g2.shape[0]
-    yl=np.ones(nevt)
+    yl=np.zeros(nevt)
     xl=np.divide(g2, 255)
     print(xl)
     print (len(yl))
-    path='/sps/km3net/users/ffilippi/ML/outputfolder/numuCC_x_y.h5'
+    path='/sps/km3net/users/ffilippi/ML/outputfolder/mupage_x_y.h5'
     with h5py.File(path, 'w') as hdf:
         hdf.create_dataset('x', data=xl, dtype=xl.dtype)
         hdf.create_dataset('y', data=yl, dtype=yl.dtype)
