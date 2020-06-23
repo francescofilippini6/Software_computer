@@ -44,11 +44,12 @@ model.compile(optimizer='adam',
 X_tr=[]
 Y_tr=[]
 
-with h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder/numuCC_x_y.h5','r') as hdf:
+with h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder1/concatenated_x_y.h5','r') as hdf:
     X_t = np.array(hdf.get('x'))
     Y_t = np.array(hdf.get('y'))
-X_tr_nu = X_t.reshape(2243,18,110,1)
-Y_tr_nu = Y_t.reshape(2243,1)
+
+X_tr_nu = X_t.reshape(24919,18,110,1)
+Y_tr_nu = Y_t.reshape(24919,1)
 with h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder/mupage_x_y.h5','r') as hdf:
     X_t = np.array(hdf.get('x'))
     Y_t = np.array(hdf.get('y'))
