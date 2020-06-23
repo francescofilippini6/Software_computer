@@ -40,20 +40,6 @@ model.compile(optimizer='adam',
               metrics=['accuracy'])
 
  
-#X_tr = []
-#Y_tr = []
-#imges = train_df['id'].values
-#for img_id in tqdm_notebook(imges):
-#    temp = cv2.imread(train_dir + img_id)
-#    temp = cv2.cvtColor(temp, cv2.COLOR_BGR2GRAY)
-#    temp = np.expand_dims(temp, axis=2)
-#    X_tr.append(temp)    
-#    Y_tr.append(train_df[train_df['id'] == img_id]['has_cactus'].values[0])  
-#X_tr = np.asarray(X_tr)
-#X_tr = X_tr.astype('float32')
-#X_tr /= 255
-#Y_tr = np.asarray(Y_tr)
-
 
 X_tr=[]
 Y_tr=[]
