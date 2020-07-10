@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 import json
 import h5py
 import os
-from tqdm import tqdm, tqdm_notebook
 from keras.models import Sequential
 from keras.layers import Activation, Dropout, Flatten, Dense
 from keras.layers import Input, Dense, Activation, BatchNormalization, Flatten, Conv2D
@@ -24,11 +23,11 @@ model = Sequential()
 model.add(Conv2D(32, (3,3) ,strides = (1,1), name = 'conv0', input_shape = (18,110,1)))
 model.add(BatchNormalization(axis = 3, name = 'bn0'))
 model.add(Activation('relu'))
-
 model.add(MaxPooling2D((2,2), name='max_pool'))
+
 model.add(Conv2D(64,(4,4), strides = 1, name="conv1"))
 model.add(Activation('relu'))
-model.add(AveragePooling2D((3,3), name='avg_pool'))
+model.add(MaxPooling2D((3,3), name='avg_pool'))
 
 model.add(GlobalAveragePooling2D())
 model.add(Dense(300, activation="relu", name='rl'))
@@ -44,18 +43,19 @@ model.compile(optimizer='adam',
 X_tr=[]
 Y_tr=[]
 
-with h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder1/concatenated_x_y.h5','r') as hdf:
+with h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder_mupage/concatenated_x_y.h5','r') as hdf:
     X_t = np.array(hdf.get('x'))
     Y_t = np.array(hdf.get('y'))
 
-X_tr_nu = X_t.reshape(24919,18,110,1)
-Y_tr_nu = Y_t.reshape(24919,1)
-with h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder/mupage_x_y.h5','r') as hdf:
+X_tr_nu = X_t.reshape(161734,18,110,1)
+Y_tr_nu = Y_t.reshape(161734,1)
+
+with h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder_neutrino/concatenated_x_y.h5','r') as hdf:
     X_t = np.array(hdf.get('x'))
     Y_t = np.array(hdf.get('y'))
 
-X_t = X_t.reshape(2339,18,110,1)
-Y_t = Y_t.reshape(2339,1)
+X_t = X_t.reshape(124098,18,110,1)
+Y_t = Y_t.reshape(124098,1)
 X_tr=np.concatenate((X_tr_nu,X_t))
 Y_tr=np.concatenate((Y_tr_nu,Y_t))
 
@@ -94,6 +94,7 @@ plt.title('model loss')
 plt.ylabel('loss')
 plt.xlabel('epoch')
 plt.legend(['train', 'test'], loc='upper left')
+plt.savefig("loss.png")
 plt.show()
 #history_df = pd.DataFrame(history.history)
 #history_df[['loss', 'val_loss']].plot()

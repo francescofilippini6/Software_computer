@@ -21,11 +21,12 @@ source $JPP_DIR/setenv.sh $JPP_DIR
 
 set_variable  DEBUG          2
 set_variable  WORKDIR        /sps/km3net/users/ffilippi/ML/random_noise
-set_variable  DETECTOR       $JPP_DATA/km3net_reference.detx
+set_variable  DETECTOR       /sps/km3net/users/ffilippi/ML/caliMupage.detx
+#set_variable  DETECTOR       $JPP_DATA/km3net_reference.detx 115 strings configuration
 set_variable  TRIGGER        $JPP_DATA/trigger_parameters_arca.txt
 set_variable  BACKGROUND_HZ  10e3 600 60 7 0.8 0.08
 set_variable  RECYCLING      10 100e3
-set_variable  numberOfSlices 100
+set_variable  numberOfSlices 10000
 
 if ( do_usage $* ); then
     usage "$script [detector file [trigger file [working directory]]]"
@@ -37,8 +38,8 @@ case $# in
     1) set_variable DETECTOR $1;;
 esac
 
-set_variable  INPUT_FILE     $WORKDIR/timeslice.root
-set_variable  OUTPUT_FILE    $WORKDIR/trigger_processor.root
+set_variable  INPUT_FILE     $WORKDIR/timeslice_10k_1.root
+set_variable  OUTPUT_FILE    $WORKDIR/trigger_processor_10k_1.root
 
 if [[ ! -f $DETECTOR ]]; then
     JDetector.sh $DETECTOR

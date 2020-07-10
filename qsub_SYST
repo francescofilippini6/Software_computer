@@ -1,0 +1,10 @@
+#!/bin/sh 
+
+
+#export NAMEJOB=syst_tuple_${run}
+export WORKDIR=/sps/km3net/users/ffilippi/ML/
+export NAMEJOB="CNN"
+
+qsub -V -P P_km3net -l sps=1 -l ct=29:00:00 -l fsize=10G -l vmem=4G -N $NAMEJOB -o $WORKDIR/log/$NAMEJOB.log -e $WORKDIR/log/$NAMEJOB.err $WORKDIR/jobscript.sh
+
+

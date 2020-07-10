@@ -11,7 +11,7 @@ import scipy.misc
 from PIL import Image
 km3pipe.style.use("km3pipe")
 
-with h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder/numuCC_hist.h5','r') as hdf:
+with h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder_mupage/concatenated.h5','r') as hdf:
     base_items = list(hdf.items())
     print('Items in the base directory', base_items)
     g2 = np.array(hdf.get('x'))
@@ -29,5 +29,5 @@ with h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder/numuCC_hist.h5','r') 
         plt.ylabel('z (m)')
         plt.xlabel('time (ns)')
         plt.title('z-t plane image')
-        plt.savefig('/sps/km3net/users/ffilippi/ML/outputfolder/nu_mu_mupage/'+name)
+        plt.savefig('/sps/km3net/users/ffilippi/ML/outputfolder_mupage/'+name)
         print(name)

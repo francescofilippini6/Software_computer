@@ -1,0 +1,42 @@
+**********************************************************************
+*                     Grid Engine Batch System                       *
+*              IN2P3 Computing Centre, Villeurbanne FR               *
+**********************************************************************
+* User:                           ffilippi                           *
+* Group:                          km3net                             *
+* Jobname:                        CNN                                *
+* JobID:                          18192810                           *
+* Queue:                          long                               *
+* Worker:                         ccwsge0504.in2p3.fr                *
+* Operating system:               Linux 3.10.0-1127.10.1.el7.x86_64  *
+* Project:                        P_km3net                           *
+**********************************************************************
+* Submitted on:                   Fri Jul 10 10:32:29 CEST 2020      *
+* Started on:                     Fri Jul 10 10:32:36 CEST 2020      *
+**********************************************************************
+
+**********************************************************************
+* Submitted on:                   Fri Jul 10 10:32:29 CEST 2020      *
+* Started on:                     Fri Jul 10 10:32:36 CEST 2020      *
+* Ended on:                       Fri Jul 10 10:32:48 CEST 2020      *
+* Exit status:                    139 (received signal SEGV)         *
+**********************************************************************
+* Requested                                                          *
+*   CPU cores:                    1 core(s)                          *
+*   CPU time:                     29:00:00 (104400 seconds) (1)      *
+**********************************************************************
+* Consumed                                                           *
+*   wallclock:                    00:00:12 (12 seconds)              *
+*   CPU time:                     00:00:05 (5 seconds)               *
+*   CPU scaling factor:           10.87                              *
+*   normalized CPU time:          00:00:55 (55 HS06 seconds)         *
+*   CPU efficiency:               41 % (2)                           *
+*   vmem:                         3.440 GB (3)                       *
+*   maxvmem:                      3.440 GB (3)                       *
+*   maxrss:                       154.312 MB (3)                     *
+**********************************************************************
+Notes:
+(1) Formula: requested CPU time * requested CPU cores
+(2) Formula: CPU time / ( wallclock * requested CPU cores )
+(3) See man sge_accounting
+For more information: qacct -j 18192810                         
