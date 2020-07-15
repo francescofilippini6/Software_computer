@@ -1,23 +1,22 @@
-import matplotlib.pyplot as plt    # our plotting module
-import pandas as pd    # the main HDF5 reader
-import numpy as np    # must have
+import matplotlib.pyplot as plt  
+import pandas as pd   
+import numpy as np    
 import km3pipe as kp    # some KM3NeT related helper functions
-import seaborn as sns    # beautiful statistical plots!
-
-
+import seaborn as sns   
 import km3pipe.style
+
 km3pipe.style.use("km3pipe")
-filepath='numuCC.h5'
-#calibration step already performed
-#cal = kp.calib.Calibration(filename="KM3NeT_00000042_00008494.detx")
 
-primaries = pd.read_hdf(filepath, '/mc_tracks')
-info = pd.read_hdf(filepath, '/event_info')
-print(primaries.head(10))
+filepath='/sps/km3net/users/ffilippi/ML/outputfolder_mupage/concatenated_5.h5'
+
+#primaries = pd.read_hdf(filepath, '/mc_tracks')
+#info = pd.read_hdf(filepath, '/event_info')
+#print(info.head(10))
 #how to group a muon bundle????
-primariess = primaries.groupby('group_id').first()
-print(len(primariess))
-
+#primariess = primaries.groupby('group_id').first()
+#print(len(primariess))
+info1 = pd.read_hdf(filepath, '/x')
+print(info1.head(10))
 plt.figure()
 
 plt.subplot(141)

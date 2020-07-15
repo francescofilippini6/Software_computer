@@ -22,8 +22,8 @@ source $JPP_DIR/setenv.sh $JPP_DIR
 set_variable  DEBUG          2
 set_variable  WORKDIR        /sps/km3net/users/ffilippi/ML/random_noise
 set_variable  DETECTOR       /sps/km3net/users/ffilippi/ML/caliMupage.detx
-#set_variable  DETECTOR       $JPP_DATA/km3net_reference.detx 115 strings configuration
-set_variable  TRIGGER        $JPP_DATA/trigger_parameters_arca.txt
+#set_variable  DETECTOR      $JPP_DATA/km3net_reference.detx 115 strings configuration
+set_variable  TRIGGER        /sps/km3net/users/ffilippi/ML/trigger_parameters_arca.txt
 set_variable  BACKGROUND_HZ  10e3 600 60 7 0.8 0.08
 set_variable  RECYCLING      10 100e3
 set_variable  numberOfSlices 10000
