@@ -7,11 +7,11 @@ import km3pipe.style
 
 km3pipe.style.use("km3pipe")
 
-filepath='/sps/km3net/users/ffilippi/ML/outputfolder_mupage/concatenated_5.h5'
+filepath='/sps/km3net/users/ffilippi/ML/outputfolder_mupage/concatenated_2.h5'
 
 #primaries = pd.read_hdf(filepath, '/mc_tracks')
-#info = pd.read_hdf(filepath, '/event_info')
-#print(info.head(10))
+info = pd.read_hdf(filepath, '/event_info')
+print(info.head(10))
 #how to group a muon bundle????
 #primariess = primaries.groupby('group_id').first()
 #print(len(primariess))

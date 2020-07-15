@@ -1,11 +1,11 @@
-2020-07-15 16:41:17.636851: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /pbs/throng/km3net/software/aanet/master/lib:/pbs/throng/km3net/src/Jpp/master/externals/km3net-dataformat/lib:/pbs/throng/km3net/src/Jpp/master/externals/antares-dataformat/:/pbs/throng/km3net/src/Jpp/master/externals/dbclient/lib/:/pbs/throng/km3net/src/Jpp/master/out/Linux/lib/:/pbs/throng/km3net/software/python/3.7.5/lib:/pbs/throng/km3net/software/root/6.20.04/lib:/pbs/software/centos-7-x86_64/xrootd/4.8.1/lib:/pbs/software/centos-7-x86_64/xrootd/4.8.1/lib64:/pbs/software/centos-7-x86_64/oracle/12.2.0/instantclient/lib::/opt/sge/lib/lx-amd64:/opt/sge/lib/lx-amd64
-2020-07-15 16:41:17.636954: E tensorflow/stream_executor/cuda/cuda_driver.cc:313] failed call to cuInit: UNKNOWN ERROR (303)
-2020-07-15 16:41:17.637005: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (ccwsge0449): /proc/driver/nvidia/version does not exist
-2020-07-15 16:41:17.637615: I tensorflow/core/platform/cpu_feature_guard.cc:143] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
-2020-07-15 16:41:17.673167: I tensorflow/core/platform/profile_utils/cpu_utils.cc:102] CPU Frequency: 2195000000 Hz
-2020-07-15 16:41:17.676580: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5ceefd0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
-2020-07-15 16:41:17.676618: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
-2020-07-15 16:41:18.009165: W tensorflow/core/framework/op_kernel.cc:1753] OP_REQUIRES failed at cwise_ops_common.h:134 : Resource exhausted: OOM when allocating tensor with shape[52224,4096] and type float on /job:localhost/replica:0/task:0/device:CPU:0 by allocator cpu
+2020-07-15 16:49:56.296535: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /pbs/throng/km3net/software/aanet/master/lib:/pbs/throng/km3net/src/Jpp/master/externals/km3net-dataformat/lib:/pbs/throng/km3net/src/Jpp/master/externals/antares-dataformat/:/pbs/throng/km3net/src/Jpp/master/externals/dbclient/lib/:/pbs/throng/km3net/src/Jpp/master/out/Linux/lib/:/pbs/throng/km3net/software/python/3.7.5/lib:/pbs/throng/km3net/software/root/6.20.04/lib:/pbs/software/centos-7-x86_64/xrootd/4.8.1/lib:/pbs/software/centos-7-x86_64/xrootd/4.8.1/lib64:/pbs/software/centos-7-x86_64/oracle/12.2.0/instantclient/lib::/opt/sge/lib/lx-amd64:/opt/sge/lib/lx-amd64
+2020-07-15 16:49:56.296621: E tensorflow/stream_executor/cuda/cuda_driver.cc:313] failed call to cuInit: UNKNOWN ERROR (303)
+2020-07-15 16:49:56.296658: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (ccwsge0866): /proc/driver/nvidia/version does not exist
+2020-07-15 16:49:56.297085: I tensorflow/core/platform/cpu_feature_guard.cc:143] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-07-15 16:49:56.319911: I tensorflow/core/platform/profile_utils/cpu_utils.cc:102] CPU Frequency: 2194895000 Hz
+2020-07-15 16:49:56.323175: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5a540b0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-07-15 16:49:56.323235: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2020-07-15 16:49:56.853457: W tensorflow/core/framework/op_kernel.cc:1753] OP_REQUIRES failed at cwise_ops_common.h:134 : Resource exhausted: OOM when allocating tensor with shape[52224,4096] and type float on /job:localhost/replica:0/task:0/device:CPU:0 by allocator cpu
 Using TensorFlow backend.
 Traceback (most recent call last):
   File "/sps/km3net/users/ffilippi/ML/CNN_3d.py", line 45, in <module>
@@ -38,3 +38,19 @@ Traceback (most recent call last):
     six.raise_from(core._status_to_exception(e.code, message), None)
   File "<string>", line 3, in raise_from
 tensorflow.python.framework.errors_impl.ResourceExhaustedError: OOM when allocating tensor with shape[52224,4096] and type float on /job:localhost/replica:0/task:0/device:CPU:0 by allocator cpu [Op:Mul]
+2020-07-15 16:56:12.380561: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /pbs/throng/km3net/software/aanet/master/lib:/pbs/throng/km3net/src/Jpp/master/externals/km3net-dataformat/lib:/pbs/throng/km3net/src/Jpp/master/externals/antares-dataformat/:/pbs/throng/km3net/src/Jpp/master/externals/dbclient/lib/:/pbs/throng/km3net/src/Jpp/master/out/Linux/lib/:/pbs/throng/km3net/software/python/3.7.5/lib:/pbs/throng/km3net/software/root/6.20.04/lib:/pbs/software/centos-7-x86_64/xrootd/4.8.1/lib:/pbs/software/centos-7-x86_64/xrootd/4.8.1/lib64:/pbs/software/centos-7-x86_64/oracle/12.2.0/instantclient/lib::/opt/sge/lib/lx-amd64:/opt/sge/lib/lx-amd64
+2020-07-15 16:56:12.380621: E tensorflow/stream_executor/cuda/cuda_driver.cc:313] failed call to cuInit: UNKNOWN ERROR (303)
+2020-07-15 16:56:12.380654: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (ccwsge0794): /proc/driver/nvidia/version does not exist
+2020-07-15 16:56:12.380958: I tensorflow/core/platform/cpu_feature_guard.cc:143] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-07-15 16:56:12.407772: I tensorflow/core/platform/profile_utils/cpu_utils.cc:102] CPU Frequency: 2494170000 Hz
+2020-07-15 16:56:12.410283: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x4b45ef0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-07-15 16:56:12.410318: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+Using TensorFlow backend.
+Traceback (most recent call last):
+  File "/sps/km3net/users/ffilippi/ML/CNN_3d.py", line 58, in <module>
+    X_t = np.array(hdf.get('x'))
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "/pbs/throng/km3net/software/python/3.7.5/lib/python3.7/site-packages/h5py/_hl/dataset.py", line 766, in __array__
+    arr = numpy.empty(self.shape, dtype=self.dtype if dtype is None else dtype)
+MemoryError: Unable to allocate 75.0 GiB for an array with shape (515576, 18, 280, 31) and data type uint8

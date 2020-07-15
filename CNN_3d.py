@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import json
 import h5py
 import os
+from sklearn.model_selection import train_test_split
 from keras.models import Sequential
 from keras.layers import Activation, Dropout, Flatten, Dense
 from keras.layers import Input, Dense, Activation, BatchNormalization, Flatten, Conv3D
@@ -12,7 +13,7 @@ from keras.models import Model
 from keras.applications import VGG16
 from keras.optimizers import Adam
 from keras.utils import plot_model, to_categorical
-
+from batch_uploader import DataGenerator
 
 model = Sequential()
 """Parameters of Conv2D -> (5,5)kernel size
@@ -39,9 +40,9 @@ model.add(MaxPooling3D(2,strides=2, name='max_pool_2'))
 
 
 
-
-model.add(Flatten())
-#model.add(GlobalAveragePooling2D())
+model.add(BatchNormalization())
+#model.add(Flatten())
+model.add(GlobalAveragePooling3D())
 model.add(Dense(4096,activation="relu"))
 model.add(Dense(2,activation='softmax', name='sm'))
 
@@ -50,40 +51,58 @@ model.compile(optimizer='adam',
               metrics=['accuracy'])
 
  
-
-X_tr=[]
-Y_tr=[]
-
+group_id=[]
+labels=[]
 with h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder_mupage/concatenated_2.h5','r') as hdf:
-    X_t = np.array(hdf.get('x'))
-    Y_t = np.array(hdf.get('y')) 
-X_tr_nu = X_t.reshape(len(X_t),18,280,31,1)
-Y_tr_nu = Y_t.reshape(len(X_t),1)
+    event_info=np.array(hdf.get('event_info'))
+    group_id = event_info['group_id']
+    print(group_id)
+    labels=np.array(hdf.get('y'))    
+    #operate on the id of the event the split train and test?
+X_train, X_test, y_train, y_test = train_test_split(group_id,labels, test_size=0.33)
+dx = {'train' : X_train, 'validation': X_test}
+labelsa ={group_id[i]:labels[i] for i in range(len(group_id))}
+    
 
-with h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder_neutrino/concatenated_2.h5','r') as hdf:
-    X_t = np.array(hdf.get('x'))
-    Y_t = np.array(hdf.get('y'))
+training_generator = DataGenerator(dx['train'], labelsa)
+validation_generator = DataGenerator(dx['validation'], labelsa)
+#X_tr=[]
+#Y_tr=[]
 
-X_t = X_t.reshape(len(X_t),18,280,31,1)
-Y_t = Y_t.reshape(len(X_t),1)
-X_tr=np.concatenate((X_tr_nu,X_t))
-Y_tr=np.concatenate((Y_tr_nu,Y_t))
-#X_tr=np.divide(X_tr,255)
-Y_tr=to_categorical(Y_tr,num_classes=2)
-print('shape of the final dataset',X_tr.shape)
+#with h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder_mupage/concatenated_2.h5','r') as hdf:
+#    X_t = np.array(hdf.get('x'))
+#    Y_t = np.array(hdf.get('y')) 
+#X_tr_nu = X_t.reshape(len(X_t),18,280,31,1)
+#Y_tr_nu = Y_t.reshape(len(X_t),1)
+
+#with h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder_neutrino/concatenated_2.h5','r') as hdf:
+#    X_t = np.array(hdf.get('x'))
+#    Y_t = np.array(hdf.get('y'))
+
+#X_t = X_t.reshape(len(X_t),18,280,31,1)
+#Y_t = Y_t.reshape(len(X_t),1)
+#X_tr=np.concatenate((X_tr_nu,X_t))
+#Y_tr=np.concatenate((Y_tr_nu,Y_t))
+##X_tr=np.divide(X_tr,255)
+#Y_tr=to_categorical(Y_tr,num_classes=2)
+#print('shape of the final dataset',X_tr.shape)
 
 
 
-batch_size = 32
-nb_epoch = 16
+batch_size = 16
+nb_epoch = 5
 
+model.fit_generator(generator=training_generator,
+                    validation_data=validation_generator,
+                    use_multiprocessing=True,
+                    workers=6)
 
-history = model.fit(X_tr, Y_tr,
-              batch_size=batch_size,
-              epochs=nb_epoch,
-              validation_split=0.2,
-              shuffle=True,
-              verbose=2)
+#history = model.fit(X_tr, Y_tr,
+#              batch_size=batch_size,
+#              epochs=nb_epoch,
+#              validation_split=0.2,
+#              shuffle=True,
+#              verbose=2)
 #Print a table with the input and output
 print(model.summary())
 #saving the metrics in a .json file
