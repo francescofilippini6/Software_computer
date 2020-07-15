@@ -1,11 +1,11 @@
 import numpy as np
 import sys
-from os import listdir, makedirs
+from os import listdir, makedirs, getcwd
 from os.path import isfile, join, exists
 from orcasong.core import FileBinner
 from orcasong.tools import FileConcatenator
 
-general_path='/sps/km3net/users/ffilippi/ML/'
+
 
 def path_generator():
     """
@@ -13,6 +13,8 @@ def path_generator():
     0 -> MUONs
     1 -> NEUTRINOs
     """
+    general_path='/sps/km3net/users/ffilippi/ML/'
+    #general_path=getcwd()+'/'
     directory='o'
     particle_selector=int(sys.argv[1])
     if particle_selector==0:   #taking the external argument  0 = muon
@@ -32,12 +34,13 @@ def path_generator():
     
     
 
-def listing():
+def listing(mypath):
     """
     function generating the listing of the *.h5 files in the selected directory
     """
-    mypath=path_generator()[0]
     files = [join(mypath, f) for f in listdir(mypath) if f.endswith(".h5")]
+    #new_start=files.index('/sps/km3net/users/ffilippi/ML/mupage_root_files_from_irods/mupage_348.h5')
+    #files2=files[new_start:]
     return(files)
 
 def binning():
@@ -49,8 +52,9 @@ def binning():
         ["time", np.linspace(-200, 1200, 281)],
         ["channel_id",np.linspace(-0.5,31.5,32)],
     ]
+    
     fb = FileBinner(bin_edges_list) 
-    fb.run_multi(listing(),path_generator()[1],True)
+    fb.run_multi(listing(path_generator()[0]),path_generator()[1],True)
     return()
 
 def concatenate():
@@ -59,9 +63,13 @@ def concatenate():
     """
     outpath=path_generator()[1]
     infiles=listing(outpath)
+    print(infiles[0])
     ci=FileConcatenator(infiles)
-    ci.concatenate(path+'concatenated.h5')
+    ci.concatenate(outpath+'concatenated.h5')
     return()
 
-binning()
-concatenate()
+
+if __name__ == "__main__":
+    #listing()
+    #binning()
+    concatenate()
