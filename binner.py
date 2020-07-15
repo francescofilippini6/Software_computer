@@ -68,8 +68,22 @@ def concatenate():
     ci.concatenate(outpath+'concatenated.h5')
     return()
 
+def concatenate_batch():
+    outpath=path_generator()[1]
+    infiles=listing(outpath)
+    print(infiles[0])
+    list = np.array_split(np.array(infiles),4)
+    counter=1
+    for infile in list:
+        print(infile)
+        counter+=1
+        ci=FileConcatenator(infile)
+        name='concatenated_'+str(counter)+'.h5'
+        ci.concatenate(outpath+name)
+    return()
 
 if __name__ == "__main__":
     #listing()
     #binning()
-    concatenate()
+    #concatenate()
+    concatenate_batch()
