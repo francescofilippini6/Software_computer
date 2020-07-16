@@ -62,10 +62,38 @@ with h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder_mupage/concatenated_2
 X_train, X_test, y_train, y_test = train_test_split(group_id,labels, test_size=0.33)
 dx = {'train' : X_train, 'validation': X_test}
 labelsa ={group_id[i]:labels[i] for i in range(len(group_id))}
-    
+#print("train",len(dx['train']))
+#print("validation",len(dx['validation']))
+
 
 training_generator = DataGenerator(dx['train'], labelsa)
 validation_generator = DataGenerator(dx['validation'], labelsa)
+
+#batch_size = 16
+nb_epoch = 2
+
+model.fit_generator(generator=training_generator,
+                    validation_data=validation_generator,
+                    steps_per_epoch=(len(group_id)/32),
+                    epochs=nb_epoch,verbose=1)
+#,
+                    #use_multiprocessing=True,
+                    #workers=4)
+
+#history = model.fit(X_tr, Y_tr,
+#              batch_size=batch_size,
+#              epochs=nb_epoch,
+#              validation_split=0.2,
+#              shuffle=True,
+#              verbose=2)
+#Print a table with the input and output
+print(model.summary())
+#saving the metrics in a .json file
+hist_df = pd.DataFrame(history.history)
+hist_json_file = '/sps/km3net/users/ffilippi/ML/history_1.json' 
+with open(hist_json_file, mode='w') as f:
+    hist_df.to_json(f)
+
 #X_tr=[]
 #Y_tr=[]
 
@@ -86,30 +114,6 @@ validation_generator = DataGenerator(dx['validation'], labelsa)
 ##X_tr=np.divide(X_tr,255)
 #Y_tr=to_categorical(Y_tr,num_classes=2)
 #print('shape of the final dataset',X_tr.shape)
-
-
-
-batch_size = 16
-nb_epoch = 5
-
-model.fit_generator(generator=training_generator,
-                    validation_data=validation_generator,
-                    use_multiprocessing=True,
-                    workers=6)
-
-#history = model.fit(X_tr, Y_tr,
-#              batch_size=batch_size,
-#              epochs=nb_epoch,
-#              validation_split=0.2,
-#              shuffle=True,
-#              verbose=2)
-#Print a table with the input and output
-print(model.summary())
-#saving the metrics in a .json file
-hist_df = pd.DataFrame(history.history)
-hist_json_file = '/sps/km3net/users/ffilippi/ML/history_1.json' 
-with open(hist_json_file, mode='w') as f:
-    hist_df.to_json(f)
 
 #from keras.callbacks import Callback
 #out_batch = NBatchLogger()
