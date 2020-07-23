@@ -102,8 +102,8 @@ def concatenate_batch(particle,num_files):
 
 if __name__ == "__main__":
     particle_selector=int(sys.argv[1])
-    path_generator(particle_selector)
-    cut_zenith(particle_selector)
+    #path_generator(particle_selector)
+    #cut_zenith(particle_selector)
     #listing()
     #binning()
     #concatenate(particle_selector)

@@ -37,7 +37,7 @@ def printfile(particle):
     with h5py.File(filename_gen(particle)[0],'r') as hdf:
         base_items = list(hdf.items())
         print('Items in the base directory', base_items)
-        g2=hdf['x']
+        g2=hdf['/x']
         nevt=len(g2)
         zbins=len(g2[0])
         tbins=len(g2[0][0])
@@ -82,7 +82,6 @@ def newfile(particle):
 
 if __name__=="__main__":
     typeofparticle = int(sys.argv[1])
-    #ci=printfile()
     #newfile()
     printfile(typeofparticle)
     appendLabelDataset(typeofparticle)

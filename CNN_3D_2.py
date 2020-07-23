@@ -56,8 +56,8 @@ model.add(MaxPooling3D(2, strides=2, name='max_pool_1'))
 
 
 #model.add(BatchNormalization())
-#model.add(Flatten())
-model.add(GlobalAveragePooling3D())
+model.add(Flatten())
+#model.add(GlobalAveragePooling3D())
 model.add(Dense(128,activation="relu"))
 model.add(Dense(2,activation='softmax', name='sm'))
 
@@ -68,7 +68,7 @@ model.compile(optimizer=Adam(learning_rate=0.01),
               loss='categorical_crossentropy',
               metrics=['accuracy'])
 #@profile
-def batch_uplo(): 
+def batch_uploader_caller(): 
    """
    creating the dictionary and position array to be passed to batch_uploader.py -> DataGenerator()
    reading muon events
@@ -125,7 +125,7 @@ def batch_uplo():
 
 nb_epoch = 2
 
-train,val=batch_uplo()
+train,val=batch_uploader_caller()
 
 model.fit_generator(generator=train,
                     validation_data=val,
@@ -139,7 +139,7 @@ model.fit_generator(generator=train,
 print(model.summary())
 #saving the metrics in a .json file
 hist_df = pd.DataFrame(history.history)
-hist_json_file = '/sps/km3net/users/ffilippi/ML/history_1.json' 
+hist_json_file = getcwd()+'/history_1.json' 
 with open(hist_json_file, mode='w') as f:
     hist_df.to_json(f)
 

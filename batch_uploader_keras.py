@@ -70,7 +70,7 @@ class DataGenerator(keras.utils.Sequence):
         
       # Store class
       y[i] = self.labels[ID]
-
+    #return X, y
     return X, keras.utils.to_categorical(y, num_classes=self.n_classes)
 #if __name__=="__main__":
 #  ci=DataGenerator()

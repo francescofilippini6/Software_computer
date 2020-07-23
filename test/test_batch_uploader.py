@@ -1,5 +1,6 @@
 import numpy as np
 import sys
+sys.path.insert(0, '/sps/km3net/users/ffilippi/ML/ARCA-CNN')
 from batch_uploader_keras import DataGenerator
 from os import getcwd
 import h5py
@@ -13,7 +14,7 @@ import hypothesis.strategies as st
 def dummy_list():
     group_id=[]
     labels=[]
-    with h5py.File('/sps/km3net/users/ffilippi/ML/test_file/concatenated.h5','r') as hdf:
+    with h5py.File('/sps/km3net/users/ffilippi/ML/test/test_file/concatenated.h5','r') as hdf:
         labels=np.array(hdf['y'])
     for x in range(0,(len(labels))):
         name='id_'+str(x)
@@ -34,7 +35,7 @@ def test_getitem_dimensions(value):
     if value < a.__len__() and value > 0:
         assert len(a.__getitem__(value)[0]) == a.batch_size 
         assert a.__getitem__(value)[0].shape==(a.batch_size,18,280,31,1)
-        assert a.__getitem__(value)[1].shape==(a.batch_size,)
+        assert a.__getitem__(value)[1].shape==(a.batch_size,2)
 
 @given(value=st.integers())
 def test_data_values(value):

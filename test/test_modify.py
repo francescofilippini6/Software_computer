@@ -1,5 +1,7 @@
 import numpy as np
 import sys
+import sys
+sys.path.insert(0, '/sps/km3net/users/ffilippi/ML')
 from binner import path_generator
 from modify_h5_file_adding_label import filename_gen, printfile, appendLabelDataset, newfile
 from os import getcwd

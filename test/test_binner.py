@@ -1,6 +1,7 @@
 import numpy as np
 import sys
-from sps.km3net.users.ffilippi.ML.test.binner import listing, path_generator, binning
+sys.path.insert(0, '/sps/km3net/users/ffilippi/ML')
+from binner import listing, path_generator, binning
 from os import getcwd
 import os
 import pytest
@@ -17,7 +18,9 @@ class Test_listing:
         """
         testing that if not empty, we have a list of strings
         """
-        path=getcwd()+'/outputfolder_mupage/'
+        path=os.sep.join(os.getcwd().split(os.sep)[:-1])
+        path=path+'/outputfolder_mupage'
+        
         files=listing(path)
         assert all(isinstance(x,str) for x in files)
 
@@ -25,7 +28,10 @@ class Test_listing:
         """
         testing that elements return the absolute path 
         """
-        path=getcwd()+'/outputfolder_mupage/'
+        
+        path=os.sep.join(os.getcwd().split(os.sep)[:-1])
+        path=path+'/outputfolder_mupage'
+                
         files=listing(path)
         assert os.path.isabs(files[0])
 
@@ -38,13 +44,14 @@ class Test_path_gen:
         """
         testing neutrino path generation
         """
-        assert path_generator(1) == (getcwd()+'/nu_gehen/',getcwd()+'/outputfolder_neutrino/')
+        assert path_generator(1) == ('/sps/km3net/users/ffilippi/ML/test/nu_gehen/','/sps/km3net/users/ffilippi/ML/test/outputfolder_neutrino/')
 
     def test_path_generator2(self):
         """
         testing muon path generation
         """
-        assert path_generator(0) == (getcwd()+'/mupage_root_files_from_irods/',getcwd()+'/outputfolder_mupage/')
+        assert path_generator(0) == ('/sps/km3net/users/ffilippi/ML/test/mupage_root_files_from_irods/','/sps/km3net/users/ffilippi/ML/test/outputfolder_mupage/')
+    
     @given(value=st.integers())
     def test_path_generator2(self,value):
         """
