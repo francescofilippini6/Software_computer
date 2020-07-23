@@ -1,4 +1,4 @@
-# Software and computing project
+# Software and computing project [![Build Status](https://travis-ci.com/francescofilippini6/Software_computer.svg?branch=master)](https://travis-ci.com/francescofilippini6/Software_computer)
 Use and development of libraries implemented by KM3NeT collaboration for Machine Learning. Build of a CNN for discrimination between muons and environmental background. Further informations:
 
 https://git.km3net.de/ml/OrcaSong
