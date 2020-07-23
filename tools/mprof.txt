@@ -1,0 +1,5 @@
+mprof run <script>
+mprof plot
+
+using @profile will help to keep track of the functions usage memory
+not import the profile, comment it in order to recored the timestamps

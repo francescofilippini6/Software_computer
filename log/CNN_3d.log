@@ -1,0 +1,18 @@
+**********************************************************************
+*                     Grid Engine Batch System                       *
+*              IN2P3 Computing Centre, Villeurbanne FR               *
+**********************************************************************
+* User:                           ffilippi                           *
+* Group:                          km3net                             *
+* Jobname:                        CNN_3d                             *
+* JobID:                          18998614                           *
+* Queue:                          long                               *
+* Worker:                         ccwsge0285.in2p3.fr                *
+* Operating system:               Linux 3.10.0-1127.10.1.el7.x86_64  *
+* Project:                        P_km3net                           *
+**********************************************************************
+* Submitted on:                   Thu Jul 16 12:37:06 CEST 2020      *
+* Started on:                     Thu Jul 16 12:37:29 CEST 2020      *
+**********************************************************************
+[     0      1      2 ... 515573 515574 515575]
+Epoch 1/2

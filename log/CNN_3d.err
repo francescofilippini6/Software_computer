@@ -1,0 +1,24 @@
+2020-07-16 12:37:44.027309: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /pbs/throng/km3net/software/aanet/master/lib:/pbs/throng/km3net/src/Jpp/master/externals/km3net-dataformat/lib:/pbs/throng/km3net/src/Jpp/master/externals/antares-dataformat/:/pbs/throng/km3net/src/Jpp/master/externals/dbclient/lib/:/pbs/throng/km3net/src/Jpp/master/out/Linux/lib/:/pbs/throng/km3net/software/python/3.7.5/lib:/pbs/throng/km3net/software/root/6.20.04/lib:/pbs/software/centos-7-x86_64/xrootd/4.8.1/lib:/pbs/software/centos-7-x86_64/xrootd/4.8.1/lib64:/pbs/software/centos-7-x86_64/oracle/12.2.0/instantclient/lib::/opt/sge/lib/lx-amd64:/opt/sge/lib/lx-amd64
+2020-07-16 12:37:44.027379: E tensorflow/stream_executor/cuda/cuda_driver.cc:313] failed call to cuInit: UNKNOWN ERROR (303)
+2020-07-16 12:37:44.027416: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (ccwsge0285): /proc/driver/nvidia/version does not exist
+2020-07-16 12:37:44.027932: I tensorflow/core/platform/cpu_feature_guard.cc:143] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-07-16 12:37:44.055940: I tensorflow/core/platform/profile_utils/cpu_utils.cc:102] CPU Frequency: 2194845000 Hz
+2020-07-16 12:37:44.058877: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x62612b0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-07-16 12:37:44.058934: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+Using TensorFlow backend.
+Traceback (most recent call last):
+  File "/sps/km3net/users/ffilippi/ML/CNN_3d.py", line 78, in <module>
+    epochs=nb_epoch,verbose=1)
+  File "/pbs/home/f/ffilippi/.local/lib/python3.7/site-packages/keras/legacy/interfaces.py", line 91, in wrapper
+    return func(*args, **kwargs)
+  File "/pbs/home/f/ffilippi/.local/lib/python3.7/site-packages/keras/engine/training.py", line 1732, in fit_generator
+    initial_epoch=initial_epoch)
+  File "/pbs/home/f/ffilippi/.local/lib/python3.7/site-packages/keras/engine/training_generator.py", line 220, in fit_generator
+    reset_metrics=False)
+  File "/pbs/home/f/ffilippi/.local/lib/python3.7/site-packages/keras/engine/training.py", line 1508, in train_on_batch
+    class_weight=class_weight)
+  File "/pbs/home/f/ffilippi/.local/lib/python3.7/site-packages/keras/engine/training.py", line 621, in _standardize_user_data
+    exception_prefix='target')
+  File "/pbs/home/f/ffilippi/.local/lib/python3.7/site-packages/keras/engine/training_utils.py", line 145, in standardize_input_data
+    str(data_shape))
+ValueError: Error when checking target: expected sm to have shape (2,) but got array with shape (1,)

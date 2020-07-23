@@ -1,0 +1,30 @@
+2020-07-18 16:02:41.986464: I tensorflow/core/platform/cpu_feature_guard.cc:143] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-07-18 16:02:42.015205: I tensorflow/core/platform/profile_utils/cpu_utils.cc:102] CPU Frequency: 2494215000 Hz
+2020-07-18 16:02:42.017859: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5653280 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-07-18 16:02:42.017942: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2020-07-18 16:02:42.023199: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /pbs/throng/km3net/software/aanet/master/lib:/pbs/throng/km3net/src/Jpp/master/externals/km3net-dataformat/lib:/pbs/throng/km3net/src/Jpp/master/externals/antares-dataformat/:/pbs/throng/km3net/src/Jpp/master/externals/dbclient/lib/:/pbs/throng/km3net/src/Jpp/master/out/Linux/lib/:/pbs/throng/km3net/software/python/3.7.5/lib:/pbs/throng/km3net/software/root/6.20.04/lib:/pbs/software/centos-7-x86_64/xrootd/4.8.1/lib:/pbs/software/centos-7-x86_64/xrootd/4.8.1/lib64:/pbs/software/centos-7-x86_64/oracle/12.2.0/instantclient/lib::/opt/sge/lib/lx-amd64:/opt/sge/lib/lx-amd64
+2020-07-18 16:02:42.023227: E tensorflow/stream_executor/cuda/cuda_driver.cc:313] failed call to cuInit: UNKNOWN ERROR (303)
+2020-07-18 16:02:42.023252: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (ccwsge0820): /proc/driver/nvidia/version does not exist
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+/var/spool/sge/ccwsge0820/job_scripts/19907974: line 4: 47377 Aborted                 python /sps/km3net/users/ffilippi/ML/CNN_3d.py
+2020-07-18 16:05:24.664682: I tensorflow/core/platform/cpu_feature_guard.cc:143] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-07-18 16:05:24.700576: I tensorflow/core/platform/profile_utils/cpu_utils.cc:102] CPU Frequency: 2194965000 Hz
+2020-07-18 16:05:24.704159: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5072720 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-07-18 16:05:24.704220: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2020-07-18 16:05:24.711493: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /pbs/throng/km3net/software/aanet/master/lib:/pbs/throng/km3net/src/Jpp/master/externals/km3net-dataformat/lib:/pbs/throng/km3net/src/Jpp/master/externals/antares-dataformat/:/pbs/throng/km3net/src/Jpp/master/externals/dbclient/lib/:/pbs/throng/km3net/src/Jpp/master/out/Linux/lib/:/pbs/throng/km3net/software/python/3.7.5/lib:/pbs/throng/km3net/software/root/6.20.04/lib:/pbs/software/centos-7-x86_64/xrootd/4.8.1/lib:/pbs/software/centos-7-x86_64/xrootd/4.8.1/lib64:/pbs/software/centos-7-x86_64/oracle/12.2.0/instantclient/lib::/opt/sge/lib/lx-amd64:/opt/sge/lib/lx-amd64
+2020-07-18 16:05:24.711559: E tensorflow/stream_executor/cuda/cuda_driver.cc:313] failed call to cuInit: UNKNOWN ERROR (303)
+2020-07-18 16:05:24.711600: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (ccwsge0432): /proc/driver/nvidia/version does not exist
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+/var/spool/sge/ccwsge0432/job_scripts/19908630: line 4: 22181 Aborted                 python /sps/km3net/users/ffilippi/ML/CNN_3d.py
+2020-07-19 16:42:27.184161: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /pbs/throng/km3net/software/aanet/master/lib:/pbs/throng/km3net/src/Jpp/master/externals/km3net-dataformat/lib:/pbs/throng/km3net/src/Jpp/master/externals/antares-dataformat/:/pbs/throng/km3net/src/Jpp/master/externals/dbclient/lib/:/pbs/throng/km3net/src/Jpp/master/out/Linux/lib/:/pbs/throng/km3net/software/python/3.7.5/lib:/pbs/throng/km3net/software/root/6.20.04/lib:/pbs/software/centos-7-x86_64/xrootd/4.8.1/lib:/pbs/software/centos-7-x86_64/xrootd/4.8.1/lib64:/pbs/software/centos-7-x86_64/oracle/12.2.0/instantclient/lib::/opt/sge/lib/lx-amd64:/opt/sge/lib/lx-amd64
+2020-07-19 16:42:27.184260: E tensorflow/stream_executor/cuda/cuda_driver.cc:313] failed call to cuInit: UNKNOWN ERROR (303)
+2020-07-19 16:42:27.184315: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (ccwsge0534): /proc/driver/nvidia/version does not exist
+2020-07-19 16:42:27.184911: I tensorflow/core/platform/cpu_feature_guard.cc:143] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-07-19 16:42:27.214620: I tensorflow/core/platform/profile_utils/cpu_utils.cc:102] CPU Frequency: 2195030000 Hz
+2020-07-19 16:42:27.218154: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5ba7380 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-07-19 16:42:27.218229: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+/var/spool/sge/ccwsge0534/job_scripts/20180682: line 4: 12222 Aborted                 python /sps/km3net/users/ffilippi/ML/CNN_3D_2.py

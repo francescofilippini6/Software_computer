@@ -1,13 +1,11 @@
 #!/bin/sh 
 
-
-#export NAMEJOB=syst_tuple_${run}
-#export WORKDIR=/sps/km3net/users/ffilippi/ML/
 export WORKDIR=/sps/km3net/users/ffilippi/ML/
-export NAMEJOB="LA_1v1"
+export NAMEJOB="Final_Concatenator"
+
+
+#qsub -l GPU=1,GPUtype=V100 -q mc_gpu_medium -pe multicores_gpu 4 -P P_km3net -l sps=1 -l ct=29:00:00 -N $NAMEJOB -o $WORKDIR/log/$NAMEJOB.log -e $WORKDIR/log/$NAMEJOB.err -V $WORKDIR/batch.sh
 
 qsub -V -P P_km3net -l sps=1 -l ct=29:00:00 -N $NAMEJOB -o $WORKDIR/log/$NAMEJOB.log -e $WORKDIR/log/$NAMEJOB.err $WORKDIR/jobscript.sh
-#qsub -V -P P_km3net -l sps=1 -l ct=29:00:00 -N $NAMEJOB -o $WORKDIR/log/$NAMEJOB.log -e $WORKDIR/log/$NAMEJOB.err $WORKDIR/JTriggerProcessor.sh -d 1 -T 1 -@ "writeL2=1"
-#qsub -V -P P_km3net -l sps=1 -l ct=29:00:00 -N $NAMEJOB -o $WORKDIR/log/$NAMEJOB.log -e $WORKDIR/log/$NAMEJOB.err $WORKDIR/tohdfconversion_2.sh
-#-l GPUtype=K80
+
 
