@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
-import json
+
 
 #with open('history.json', 'r') as myfile:
 #    history=myfile.read()
