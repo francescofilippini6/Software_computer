@@ -22,7 +22,7 @@ def test_printfile():
     image=(printfile(0)[1],printfile(0)[2],printfile(0)[3])
     assert image == (18,280,31)
     
-def test_appendDataset():
-    assert appendLabelDataset(0) == printfile(0)[0]
+#def test_appendDataset():
+#    assert appendLabelDataset(0) == printfile(0)[0]
 
     

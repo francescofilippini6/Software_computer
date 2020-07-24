@@ -6,8 +6,7 @@ from os import getcwd
 import h5py
 import os
 import pytest
-import unittest
-from hypothesis import given
+from hypothesis import given, settings
 import hypothesis.strategies as st
 
 
@@ -20,6 +19,7 @@ def dummy_list():
         name='id_'+str(x)
         group_id.append(name)    
     dict_label ={group_id[i]:labels[i] for i in range(len(group_id))}
+    hdf.close()
     return group_id, dict_label, len(labels)
 
 a=DataGenerator(dummy_list()[0],dummy_list()[1])
@@ -27,6 +27,7 @@ a=DataGenerator(dummy_list()[0],dummy_list()[1])
 def test_len():
     assert a.__len__() == int(dummy_list()[2]/a.batch_size)
 
+@settings(max_examples=10,deadline=300)
 @given(value=st.integers())
 def test_data_values(value):
     """
@@ -35,7 +36,7 @@ def test_data_values(value):
     if value < a.__len__() and value > 0:
         assert a.__getitem__(value)[1].shape==(a.batch_size,2)
 
-
+@settings(max_examples=10)
 @given(value=st.integers())
 def test_getitem_dimensions(value):
     """
