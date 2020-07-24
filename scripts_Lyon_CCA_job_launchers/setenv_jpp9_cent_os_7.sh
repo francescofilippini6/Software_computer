@@ -10,4 +10,4 @@ workdir=${PWD}
 # Load JPP
 cd /pbs/throng/km3net/src/Jpp/v9.0.8454/
 source /pbs/throng/km3net/src/Jpp/v9.0.8454/setenv.sh
-cd ${workdir}
+cd "${workdir}"

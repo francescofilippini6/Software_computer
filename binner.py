@@ -3,7 +3,7 @@ import sys
 import pandas as pd
 import km3pipe as kp
 from os import listdir, makedirs, getcwd
-from os.path import isfile, join, exists
+from os.path import  join, exists
 from orcasong.core import FileBinner
 from orcasong.tools import FileConcatenator
 
@@ -16,9 +16,8 @@ def path_generator(particle):
     0 -> MUONs
     1 -> NEUTRINOs
     """
-    #general_path='/sps/km3net/users/ffilippi/ML/'
+    
     general_path=getcwd()+'/'
-    #print(general_path)
     directory='o'
     if particle==0:   #taking the external argument  0 = muon
         inpath=general_path +'mupage_root_files_from_irods/'
@@ -48,7 +47,7 @@ def cut_zenith(particle):
     if particle == 0:
         print("Muons come only from -pi/2 to pi/2")
     if particle == 1:
-        directions=[]
+     
         tracks=0
         for filepath in listing(path_generator(particle)[0]):
             tracks = pd.read_hdf(filepath, '/mc_tracks')
