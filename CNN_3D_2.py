@@ -1,22 +1,17 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import json
 import h5py
-import os
-import random
+from os import getcwd
 from sklearn.model_selection import train_test_split
 from keras.models import Sequential
-from tensorflow.keras.callbacks import LearningRateScheduler
 from tensorflow.python.client import device_lib
 from keras.layers import Activation, Dropout, Flatten, Dense
-from keras.layers import Input, Dense, Activation, BatchNormalization, Flatten, Conv3D
+from keras.layers import Dense, Activation, BatchNormalization, Flatten, Conv3D
 from keras.layers import AveragePooling3D, MaxPooling3D, Dropout, GlobalAveragePooling3D
-from keras.models import Model
-from keras.callbacks import ReduceLROnPlateau, ModelCheckpoint, EarlyStopping, TensorBoard, LambdaCallback
-from keras.applications import VGG16
+from keras.callbacks import ModelCheckpoint, EarlyStopping, TensorBoard, LambdaCallback
 from keras.optimizers import Adam
-from keras.utils import plot_model, to_categorical
+from keras.utils import to_categorical
 #from batch_uploader import DataGenerator
 from batch_uploader_keras import DataGenerator
 
@@ -68,7 +63,8 @@ model.compile(optimizer=Adam(learning_rate=0.01),
               loss='categorical_crossentropy',
               metrics=['accuracy'])
 #@profile
-def batch_uploader_caller(): 
+def batch_uploader_caller():
+ 
    """
    creating the dictionary and position array to be passed to batch_uploader.py -> DataGenerator()
    reading muon events
@@ -127,7 +123,7 @@ nb_epoch = 2
 
 train,val=batch_uploader_caller()
 
-model.fit_generator(generator=train,
+history=model.fit_generator(generator=train,
                     validation_data=val,
                     epochs=nb_epoch,verbose=1
                     ,use_multiprocessing=True,

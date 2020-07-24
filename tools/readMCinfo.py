@@ -2,34 +2,15 @@ import matplotlib.pyplot as plt
 import pandas as pd   
 import numpy as np    
 import km3pipe as kp    # some KM3NeT related helper functions
-import seaborn as sns   
 import km3pipe.style
-import h5py
 km3pipe.style.use("km3pipe")
 
 filepath='/sps/km3net/users/ffilippi/ML/nu_gehen/anu_mu_222.h5'
-
-#primaries = pd.read_hdf(filepath, '/mc_tracks')
 info = pd.read_hdf(filepath, '/mc_tracks')
-print(info)
-primariess = info.groupby('group_id').first()
-print(primariess.keys())
-zeniths = kp.math.zenith(primariess.filter(regex='^dir_.?$'))
-print (zeniths)
-#a = h5py.File(filepath, "r")
-#print(a.keys())
-#xa=info['group_id']
-#if len(xa) != len(set(xa)):
-#    print("aiia")
-#else:
-print("perfect")
-#print(info.head(10))
-#how to group a muon bundle????
+primaries = info.groupby('group_id').first()
+print(primaries.keys())
+zeniths = kp.math.zenith(primaries.filter(regex='^dir_.?$'))
 
-#print(len(primariess))
-#info1 = a['y']
-
-#print("ciccio",info1['group_id'==50000])
 
 plt.figure()
 plt.subplot(141)

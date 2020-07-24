@@ -1,14 +1,13 @@
 import numpy as np
 import h5py
-from sklearn.utils import shuffle
-from sklearn.model_selection import train_test_split
 import keras
-import numpy as np
+
 
 class DataGenerator(keras.utils.Sequence):
-  'Generates data for Keras'
+
+  'Generates batch of data to be fed in the CNN'
   def __init__(self, list_IDs, labels, batch_size=32, dim=(18,280,31), n_channels=1,n_classes=2, shuffle=True):
-    'Initialization'
+    """Class constructor"""
     self.dim = dim
     self.batch_size = batch_size
     self.labels = labels
@@ -21,7 +20,9 @@ class DataGenerator(keras.utils.Sequence):
 
   
   def opens(self):
-    """ Open all files and prepare for read out. """
+    
+    """ Open all files once and prepare for read out. """
+
     filepath='/sps/km3net/users/ffilippi/ML/outputfolder_mupage/concatenated.h5'
     fil = h5py.File(filepath, "r")
     filepath1='/sps/km3net/users/ffilippi/ML/outputfolder_neutrino/concatenated.h5'
@@ -30,11 +31,14 @@ class DataGenerator(keras.utils.Sequence):
     self.filelist=filelist
       
   def __len__(self):
-    'Denotes the number of batches per epoch'
+    
+    """Denotes the number of batches per epoch"""
+
     return int(np.floor(len(self.list_IDs) / self.batch_size))
   
   def __getitem__(self, index):
-    'Generate one batch of data'
+    
+    """Generate one batch of data, thanks to a list of indexes"""
     # Generate indexes of the batch
     indexes = self.indexes[index*self.batch_size:(index+1)*self.batch_size]
     
@@ -47,13 +51,16 @@ class DataGenerator(keras.utils.Sequence):
     return X, y
 
   def on_epoch_end(self):
-    'Updates indexes after each epoch'
+    
+    """Updates indexes after each epoch"""
     self.indexes = np.arange(len(self.list_IDs))
     if self.shuffle == True:
       np.random.shuffle(self.indexes)
   
   def __data_generation(self, list_IDs_temp):
-    'Generates data containing batch_size samples' # X : (n_samples, *dim, n_channels)
+    
+    """Generates data containing batch_size samples"""
+    
     # Initialization
     X = np.empty((self.batch_size, *self.dim, self.n_channels))
     y = np.empty((self.batch_size), dtype=int)
