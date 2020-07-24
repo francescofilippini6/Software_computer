@@ -1,7 +1,4 @@
 language: python
-script:
-  - pytest test/ --doctest-modules -v --cov=test --cov-report html
-install:
-  - pip install -r requirements.txt
+
 after_success:
   - coveralls
