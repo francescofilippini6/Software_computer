@@ -1,5 +1,6 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cb3f2e48f8f0482f8adfc0987b383951)](https://app.codacy.com/manual/francescofilippini6/Software_computer?utm_source=github.com&utm_medium=referral&utm_content=francescofilippini6/Software_computer&utm_campaign=Badge_Grade_Dashboard)
-# Software and computing project [![Build Status](https://travis-ci.com/francescofilippini6/Software_computer.svg?branch=master)](https://travis-ci.com/francescofilippini6/Software_computer)
+
+# Software and computing project 
 
 Use and development of libraries implemented by KM3NeT collaboration for Machine Learning. Build of a CNN for discrimination between muons and environmental background. Further informations:
 
