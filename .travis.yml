@@ -1,4 +1,5 @@
 language: python
-
+script:
+-coverage run -m pytest
 after_success:
   - coveralls
