@@ -1,9 +1,0 @@
-[random_numbers]
-
-train_files = [
-    "outputfolder/numuCC_hist.h5",
-]
-
-validation_files = [
-    "outputfolder/numuCC_hist.h5",,
-]
