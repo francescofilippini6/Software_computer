@@ -1,5 +1,5 @@
 language: python
 script:
--coverage run -m pytest
+  - pytest
 after_success:
   - coveralls
