@@ -1,27 +1,13 @@
 import numpy as np
 import h5py
 import sys
-import pandas as pd
 import pandas as pd    # the main HDF5 reader
-import numpy as np    # must have
-import km3pipe as kp    # some KM3NeT related helper functions
-import km3pipe.style
-import scipy.misc
 from binner import path_generator
-km3pipe.style.use("km3pipe")
 
-#to read the x group in the h5 file
-#print(typeofparticle)
-#directory='o'
-#if typeofparticle==0:
-#    directory="outputfolder_mupage"
-#elif typeofparticle==1:
-#    directory="outputfolder_neutrino"
-#else:
-#    raise NameError('NO other particles taken into account!!')
-#general_path='/sps/km3net/users/ffilippi/ML/'
+
 
 def filename_gen(particle):
+
     """
     generation of the abs path of the existing file: concatenated and of the possible new one: concatenated_x_y.h5
     """
@@ -31,13 +17,14 @@ def filename_gen(particle):
     return filename, newfile
 
 def printfile(particle):
+
     """
     printing some statistics of the datasets in the file
     """
     with h5py.File(filename_gen(particle)[0],'r') as hdf:
         base_items = list(hdf.items())
         print('Items in the base directory', base_items)
-        g2=hdf['/x']
+        g2=hdf['x']
         nevt=len(g2)
         zbins=len(g2[0])
         tbins=len(g2[0][0])
