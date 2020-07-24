@@ -18,7 +18,8 @@ class Test_listing:
         """
         testing that if not empty, we have a list of strings
         """
-        path=os.sep.join(os.getcwd().split(os.sep)[:-1])
+        #path=os.sep.join(os.getcwd().split(os.sep)[:-1])
+        path=getcwd()
         path=path+'/outputfolder_mupage'
         
         files=listing(path)
@@ -29,7 +30,8 @@ class Test_listing:
         testing that elements return the absolute path 
         """
         
-        path=os.sep.join(os.getcwd().split(os.sep)[:-1])
+        #path=os.sep.join(os.getcwd().split(os.sep)[:-1])
+        path=getcwd()
         path=path+'/outputfolder_mupage'
                 
         files=listing(path)
@@ -44,13 +46,15 @@ class Test_path_gen:
         """
         testing neutrino path generation
         """
-        assert path_generator(1) == ('/sps/km3net/users/ffilippi/ML/test/nu_gehen/','/sps/km3net/users/ffilippi/ML/test/outputfolder_neutrino/')
-
+        # assert path_generator(1) == ('/sps/km3net/users/ffilippi/ML/test/nu_gehen/','/sps/km3net/users/ffilippi/ML/test/outputfolder_neutrino/')
+        assert path_generator(1) == ('/sps/km3net/users/ffilippi/ML/nu_gehen/','/sps/km3net/users/ffilippi/ML/outputfolder_neutrino/')
+ 
     def test_path_generator2(self):
         """
         testing muon path generation
         """
-        assert path_generator(0) == ('/sps/km3net/users/ffilippi/ML/test/mupage_root_files_from_irods/','/sps/km3net/users/ffilippi/ML/test/outputfolder_mupage/')
+        # assert path_generator(0) == ('/sps/km3net/users/ffilippi/ML/test/mupage_root_files_from_irods/','/sps/km3net/users/ffilippi/ML/test/outputfolder_mupage/')
+        assert path_generator(0) == ('/sps/km3net/users/ffilippi/ML/mupage_root_files_from_irods/','/sps/km3net/users/ffilippi/ML/outputfolder_mupage/')
     
     @given(value=st.integers())
     def test_path_generator2(self,value):

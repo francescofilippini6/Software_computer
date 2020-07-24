@@ -104,6 +104,6 @@ if __name__ == "__main__":
     #path_generator(particle_selector)
     #cut_zenith(particle_selector)
     #listing()
-    #binning()
-    #concatenate(particle_selector)
+    binning()
+    concatenate(particle_selector)
     #concatenate_batch()
