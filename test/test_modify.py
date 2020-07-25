@@ -1,15 +1,16 @@
 import numpy as np
 import sys
 import sys
-sys.path.insert(0, '/sps/km3net/users/ffilippi/ML')
-from binner import path_generator
-from modify_h5_file_adding_label import filename_gen, printfile, appendLabelDataset, newfile
 from os import getcwd
 import os
 import pytest
 import unittest
 from hypothesis import given
 import hypothesis.strategies as st
+path=getcwd()
+sys.path.insert(0, path)
+from binner import path_generator
+from modify_h5_file_adding_label import filename_gen, printfile, appendLabelDataset, newfile
 
 class Test_filename_gen:
     def test_filename1(self):

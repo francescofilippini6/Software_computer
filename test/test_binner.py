@@ -1,15 +1,15 @@
 import numpy as np
 import sys
-sys.path.insert(0, '/sps/km3net/users/ffilippi/ML')
-from binner import listing, path_generator, binning
 from os import getcwd
 import os
 import pytest
 import unittest
 from hypothesis import given
 import hypothesis.strategies as st
+path=getcwd()
+sys.path.insert(0, path)
+from binner import listing, path_generator, binning
 
-#from unittest.TestCase import assertRaises
 class Test_listing:
     """
     class test for listing function
