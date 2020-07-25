@@ -10,12 +10,9 @@ class Test_filename_gen:
 
     def test_filename0(self):
         assert filename_gen(0) == (getcwd()+'/outputfolder_mupage/concatenated.h5',getcwd()+'/outputfolder_mupage/concatenated_x_y.h5')
-       
+
 def test_printfile():
     image=(printfile(0)[1],printfile(0)[2],printfile(0)[3])
     assert image == (18,280,31)
     
-#def test_appendDataset():
-#    assert appendLabelDataset(0) == printfile(0)[0]
-
     
