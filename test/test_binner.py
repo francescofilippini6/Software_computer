@@ -1,14 +1,12 @@
-import numpy as np
 import sys
 from os import getcwd
 import os
 import pytest
-import unittest
 from hypothesis import given
 import hypothesis.strategies as st
 path=getcwd()
 sys.path.insert(0, path)
-from binner import listing, path_generator, binning
+from binner import listing, path_generator
 
 class Test_listing:
     """
@@ -64,14 +62,4 @@ class Test_path_gen:
         if value > 1:
             with pytest.raises(NameError):
                 path_generator(value)
-
-#Classll Test_binning():
-#    def test_binning(self):
-#        assert binning(0)[0]==18
-
-
-
-#class Test_concatenate:
-#    def test_concatenate(self):
-#        assert concatenate(0)
 
