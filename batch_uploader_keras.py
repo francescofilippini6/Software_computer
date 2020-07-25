@@ -1,7 +1,7 @@
 import numpy as np
 import h5py
 import keras
-
+from os import getcwd
 
 class DataGenerator(keras.utils.Sequence):
 
@@ -23,9 +23,9 @@ class DataGenerator(keras.utils.Sequence):
     
     """ Open all files once and prepare for read out. """
 
-    filepath='/sps/km3net/users/ffilippi/ML/outputfolder_mupage/concatenated.h5'
+    filepath=getcwd()+'/outputfolder_mupage/concatenated.h5'
     fil = h5py.File(filepath, "r")
-    filepath1='/sps/km3net/users/ffilippi/ML/outputfolder_neutrino/concatenated.h5'
+    filepath1=getcwd()+'/outputfolder_neutrino/concatenated.h5'
     fil2 = h5py.File(filepath1, "r")
     filelist=[fil,fil2]
     self.filelist=filelist
@@ -69,11 +69,10 @@ class DataGenerator(keras.utils.Sequence):
     for i, ID in enumerate(list_IDs_temp):
       # Store sample
       pos = int("".join(filter(str.isdigit, ID)))
-      
       if pos < len(self.filelist[0]):
-        X[i,]=(np.array(self.filelist[0]['x'][pos])).reshape(18,280,31,1)
+        X[i,]=(np.divide(np.array(self.filelist[0]['x'][pos]),255)).reshape(18,280,31,1)
       else:
-        X[i,]=(np.array(self.filelist[1]['x'][pos-(len(self.filelist[0]))])).reshape(18,280,31,1)
+        X[i,]=(np.divide(np.array(self.filelist[1]['x'][pos-(len(self.filelist[0]))]),255)).reshape(18,280,31,1)
         
       # Store class
       y[i] = self.labels[ID]
