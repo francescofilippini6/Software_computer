@@ -11,7 +11,7 @@ from batch_uploader_keras import DataGenerator
 def dummy_list():
     group_id=[]
     labels=[]
-    with h5py.File(getcwd()+'/test/outputfolder_mupage/concatenated.h5','r') as hdf:
+    with h5py.File(getcwd()+'/outputfolder_mupage/concatenated.h5','r') as hdf:
         labels=np.array(hdf['y'])
     for x in range(0,(len(labels))):
         name='id_'+str(x)
