@@ -29,6 +29,7 @@ def printfile(particle):
         zbins=len(g2[0])
         tbins=len(g2[0][0])
         pmtbins=len(g2[0][0][0])
+        hdf.close()
         return nevt, zbins, tbins, pmtbins
     
 def appendLabelDataset(particle):
@@ -39,6 +40,7 @@ def appendLabelDataset(particle):
         keys=list(hdf.keys())
         if 'y' in keys:
             print("labels already exists")
+            hdf.close()
             return len(hdf['y'])
         else:
             lenofg2 = len(hdf['x'])
@@ -48,6 +50,7 @@ def appendLabelDataset(particle):
             else:
                 yl=np.ones(lenofg2)
             hdf.create_dataset('y', data=yl, dtype=yl.dtype)
+            hdf.close()
             return len(yl) 
 
 def newfile(particle):
