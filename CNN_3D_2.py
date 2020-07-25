@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 import h5py
 from os import getcwd
 from sklearn.model_selection import train_test_split
@@ -8,18 +7,17 @@ from keras.models import Sequential
 from tensorflow.python.client import device_lib
 from keras.layers import Activation, Dropout, Flatten, Dense
 from keras.layers import Dense, Activation, BatchNormalization, Flatten, Conv3D
-from keras.layers import AveragePooling3D, MaxPooling3D, Dropout, GlobalAveragePooling3D
+from keras.layers import AveragePooling3D, MaxPooling3D,  GlobalAveragePooling3D
 from keras.callbacks import ModelCheckpoint, EarlyStopping, TensorBoard, LambdaCallback
 from keras.optimizers import Adam
-from keras.utils import to_categorical
 from batch_uploader_keras import DataGenerator
 
 #@profile
 def get_available_devices():
+   """to know if training is running on GPUs"""
+
    local_device_protos = device_lib.list_local_devices()
    print( [x.name for x in local_device_protos])
-
-
 #get_available_devices()
 
 model = Sequential()
@@ -63,7 +61,6 @@ model.compile(optimizer=Adam(learning_rate=0.01),
               metrics=['accuracy'])
 #@profile
 def batch_uploader_caller():
- 
    """
    creating the dictionary and position array to be passed to batch_uploader.py -> DataGenerator()
    reading muon events
