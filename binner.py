@@ -43,19 +43,19 @@ def listing(mypath):
     files = [join(mypath, f) for f in listdir(mypath) if f.endswith(".h5")]
     return(files)
 
-def cut_zenith(particle):
-    if particle == 0:
-        print("Muons come only from -pi/2 to pi/2")
-    if particle == 1:
-     
-        tracks=0
-        for filepath in listing(path_generator(particle)[0]):
-            tracks = pd.read_hdf(filepath, '/mc_tracks')
-            primaries = tracks.groupby('group_id').first()
-            zeniths = kp.math.zenith(primaries.filter(regex='^dir_.?$'))
-            primaries['zenith'] = np.cos(zeniths)
-            primaries=primaries[primaries['zenith'] < 0]
-     #       primaries.to_hdf('data.h5', key='df', mode='w')
+#def cut_zenith(particle):
+#    if particle == 0:
+#        print("Muons come only from -pi/2 to pi/2")
+#    if particle == 1:
+#     
+#        tracks=0
+#        for filepath in listing(path_generator(particle)[0]):
+#            tracks = pd.read_hdf(filepath, '/mc_tracks')
+#            primaries = tracks.groupby('group_id').first()
+#            zeniths = kp.math.zenith(primaries.filter(regex='^dir_.?$'))
+#            primaries['zenith'] = np.cos(zeniths)
+#            primaries=primaries[primaries['zenith'] < 0]
+#            primaries.to_hdf('data.h5', key='df', mode='w')
             
         
 

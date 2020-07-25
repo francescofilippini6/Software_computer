@@ -20,45 +20,45 @@ def get_available_devices():
    print( [x.name for x in local_device_protos])
 #get_available_devices()
 
-model = Sequential()
-"""Parameters of Conv3D  
-                 16 -> filter number
-                  3 -> kernel size
-                 strides -> step of the cnn
-                 input shape -> (iumage size, channels)
-""" 
-
-model.add(Conv3D(16, 3, strides = 1, name = 'conv0_0', input_shape = (18,280,31,1)))
-model.add(Conv3D(16, 3, strides = 1, name='conv0_1'))
-model.add(Activation('relu'))
-model.add(MaxPooling3D(2, strides=1, name='max_pool'))
-
-
-model.add(Conv3D(32, 3, strides = 1, name = 'conv1_0'))
-model.add(Conv3D(32, 3, strides=1, name='conv1_1'))
-model.add(Activation('relu'))
-model.add(MaxPooling3D(2, strides=2, name='max_pool_1'))
-
-
-
-#model.add(Conv3D(64,3, strides = 1, name="conv2_0"))
-#model.add(Activation('relu'))
-#model.add(MaxPooling3D(2,strides=2, name='max_pool_2'))
-
-
-
-model.add(BatchNormalization())
-model.add(Flatten())
-#model.add(GlobalAveragePooling3D())
-model.add(Dense(128,activation="relu"))
-model.add(Dense(2,activation='softmax', name='sm'))
+def model_constructor(layer):
+   """Building a CNN with architecture similar to VGG16 type (smaller)
+   Parameters of Conv3D  
+   16 -> filter number
+   3 -> kernel size
+   strides -> step of the cnn
+   input shape -> (iumage size, channels)
+   """ 
+   model = Sequential()
+   min_exit_dimension=18
+   for i in range(layer):
+      name='conv'+str(i)+'_0'
+      name1='conv'+str(i)+'_1'
+      model.add(Conv3D(16, 3, strides = 1, name = name,padding = 'same', input_shape = (18,280,31,1)))
+      model.add(Conv3D(16, 3, strides = 1, name = name1,padding = 'same'))
+      model.add(Activation('relu'))
+      name_pol_layer='pooling'+str(i)
+      model.add(MaxPooling3D(2, strides=2, name=name_pol_layer))
+      min_exit_dimension=(18-2)/2+1 #dimension after the pooling layer, beying the others-> padding = same
+      if min_exit_dimension < 2:
+         raise NameError('Too much layers!!Try with a smaller number')
+   model.add(BatchNormalization())
+   model.add(Flatten())
+   #model.add(GlobalAveragePooling3D())
+   model.add(Dense(128,activation="relu"))
+   model.add(Dense(2,activation='softmax', name='sm'))
+   return model
 
 
-#callbacks = [LearningRateScheduler(exp_decay)]
 
-model.compile(optimizer=Adam(learning_rate=0.01),
+
+
+
+
+mymodel=model_constructor(3)
+mymodel.compile(optimizer=Adam(learning_rate=0.01),
               loss='categorical_crossentropy',
               metrics=['accuracy'])
+
 #@profile
 def batch_uploader_caller():
    """
@@ -119,7 +119,7 @@ nb_epoch = 2
 
 train,val=batch_uploader_caller()
 
-history=model.fit_generator(generator=train,
+history=mymodel.fit_generator(generator=train,
                     validation_data=val,
                     epochs=nb_epoch,verbose=1
                     ,use_multiprocessing=True,
@@ -128,7 +128,7 @@ history=model.fit_generator(generator=train,
 
 
 #Print a table with the input and output
-print(model.summary())
+print(mymodel.summary())
 #saving the metrics in a .json file
 hist_df = pd.DataFrame(history.history)
 hist_json_file = getcwd()+'/history_1.json' 
@@ -138,3 +138,16 @@ with open(hist_json_file, mode='w') as f:
 
 
 
+#model.add(Conv3D(32, 3, strides = 1, name = 'conv1_0'))
+#model.add(Conv3D(32, 3, strides=1, name='conv1_1'))
+#model.add(Activation('relu'))
+#model.add(MaxPooling3D(2, strides=2, name='max_pool_1'))
+
+
+
+#model.add(Conv3D(64,3, strides = 1, name="conv2_0"))
+#model.add(Activation('relu'))
+#model.add(MaxPooling3D(2,strides=2, name='max_pool_2'))
+#model.compile(optimizer=Adam(learning_rate=0.01),
+#              loss='categorical_crossentropy',
+#              metrics=['accuracy'])
