@@ -1,19 +1,19 @@
 import numpy as np
 import sys
-sys.path.insert(0, '/sps/km3net/users/ffilippi/ML/')
-from batch_uploader_keras import DataGenerator
 from os import getcwd
 import h5py
 import os
 import pytest
 from hypothesis import given, settings
 import hypothesis.strategies as st
-
+path=getcwd()
+sys.path.insert(0, path)
+from batch_uploader_keras import DataGenerator
 
 def dummy_list():
     group_id=[]
     labels=[]
-    with h5py.File('/sps/km3net/users/ffilippi/ML/test/outputfolder_mupage/concatenated.h5','r') as hdf:
+    with h5py.File(getcwd()+'/test/outputfolder_mupage/concatenated.h5','r') as hdf:
         labels=np.array(hdf['y'])
     for x in range(0,(len(labels))):
         name='id_'+str(x)
