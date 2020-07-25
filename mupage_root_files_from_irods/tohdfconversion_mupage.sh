@@ -19,7 +19,7 @@ VAR4="mupage_$version.h5"
 cp /sps/km3net/repo/mc/atm_muon/KM3NeT_00000042/v5.1/trigger/"$VAR3" .
 tohdf5 -o "/sps/km3net/users/ffilippi/ML/mupage_root_files_from_irods/$VAR4" "$entry"
 calibrate "$VAR3" "/sps/km3net/users/ffilippi/ML/mupage_root_files_from_irods/$VAR4" 
-rm *.detx
+rm -- *.detx
 done
 
 
