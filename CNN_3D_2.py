@@ -12,7 +12,6 @@ from keras.layers import AveragePooling3D, MaxPooling3D, Dropout, GlobalAverageP
 from keras.callbacks import ModelCheckpoint, EarlyStopping, TensorBoard, LambdaCallback
 from keras.optimizers import Adam
 from keras.utils import to_categorical
-#from batch_uploader import DataGenerator
 from batch_uploader_keras import DataGenerator
 
 #@profile
@@ -50,7 +49,7 @@ model.add(MaxPooling3D(2, strides=2, name='max_pool_1'))
 
 
 
-#model.add(BatchNormalization())
+model.add(BatchNormalization())
 model.add(Flatten())
 #model.add(GlobalAveragePooling3D())
 model.add(Dense(128,activation="relu"))
@@ -71,11 +70,11 @@ def batch_uploader_caller():
    reading the neutrino events
    extracting labels and dimensions
    """
-   hdf1=h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder_mupage/concatenated.h5','r')
+   hdf1=h5py.File(getcwd()+'/outputfolder_mupage/concatenated.h5','r')
    labels_m=np.array(hdf1['y'])    
    labels_mu=labels_m[:10000]
    hdf1.close()
-   hdf2=h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder_neutrino/concatenated.h5','r')
+   hdf2=h5py.File(getcwd()+'/outputfolder_neutrino/concatenated.h5','r')
    labels_n=np.array(hdf2['y'])    
    labels_nu=labels_n[:10000]
    hdf2.close()
