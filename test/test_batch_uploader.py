@@ -32,7 +32,7 @@ def test_data_values(value):
     if value < a.__len__() and value > 0:
         assert a.__getitem__(value)[1].shape==(a.batch_size,2)
 
-@settings(max_examples=10)
+@settings(max_examples=10,deadline=300)
 @given(value=st.integers())
 def test_getitem_dimensions(value):
     """check of dimensions of the resulting batches of data-> x=images and labels"""
