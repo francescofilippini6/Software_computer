@@ -1,4 +1,5 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cb3f2e48f8f0482f8adfc0987b383951)](https://app.codacy.com/manual/francescofilippini6/Software_computer?utm_source=github.com&utm_medium=referral&utm_content=francescofilippini6/Software_computer&utm_campaign=Badge_Grade_Dashboard)
+[![Build Status](https://travis-ci.org/francescofilippini6/Software_computer.svg?branch=master)](https://travis-ci.org/francescofilippini6/Software_computer)
 
 # Software and computing project 
 
