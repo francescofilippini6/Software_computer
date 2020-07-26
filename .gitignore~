@@ -1,6 +1,0 @@
-.DS_Store
-
-*/build/
-*.hdf5
-*.csv
-*.root
