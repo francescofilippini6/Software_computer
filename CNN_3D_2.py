@@ -17,7 +17,7 @@ def get_available_devices():
    """to know if training is running on GPUs"""
 
    local_device_protos = device_lib.list_local_devices()
-   print( [x.name for x in local_device_protos])
+   print([x.name for x in local_device_protos])
 #get_available_devices()
 
 def model_constructor(layer):
@@ -38,7 +38,7 @@ def model_constructor(layer):
       model.add(Activation('relu'))
       name_pol_layer='pooling'+str(i)
       model.add(MaxPooling3D(2, strides=2, name=name_pol_layer))
-      min_exit_dimension=(18-2)/2+1 #dimension after the pooling layer, beying the others-> padding = same
+      min_exit_dimension=(min_exit_dimension-2)/2+1 #dimension after the pooling layer, beying the others-> padding = same
       if min_exit_dimension < 2:
          raise NameError('Too much layers!!Try with a smaller number')
    model.add(BatchNormalization())
@@ -69,11 +69,11 @@ def batch_uploader_caller():
    """
    hdf1=h5py.File(getcwd()+'/outputfolder_mupage/concatenated.h5','r')
    labels_m=np.array(hdf1['y'])    
-   labels_mu=labels_m[:10000]
+   labels_mu=labels_m[:1000]
    hdf1.close()
    hdf2=h5py.File(getcwd()+'/outputfolder_neutrino/concatenated.h5','r')
    labels_n=np.array(hdf2['y'])    
-   labels_nu=labels_n[:10000]
+   labels_nu=labels_n[:1000]
    hdf2.close()
    labels = np.concatenate([labels_mu, labels_nu])
    
@@ -121,9 +121,9 @@ train,val=batch_uploader_caller()
 
 history=mymodel.fit_generator(generator=train,
                     validation_data=val,
-                    epochs=nb_epoch,verbose=1
-                    ,use_multiprocessing=True,
-                    workers=4)
+                    epochs=nb_epoch,verbose=1)
+                    #,use_multiprocessing=True,
+                    #workers=4)
 
 
 
