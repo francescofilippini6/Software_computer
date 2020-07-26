@@ -66,9 +66,10 @@ For sake of completeness, a previous trial was done with a smaller dataset O(10^
 <img width="804" alt="Schermata 2020-07-26 alle 12 42 57" src="https://user-images.githubusercontent.com/58489839/88477100-9a7c1800-cf3d-11ea-9140-4886f4242f12.png">
 
 For this reason I preprocessed again the data, increasing the number of events and including also the information concerning the channel_id.
-All the trainig steps were done @ google colab, on GPUs. The produced output is the one shown below, regardless the changes done in the learning rate, in the optimizer used and on the increased number of convolutional layers:
+All the trainig steps were done @ google colab, on GPUs. The architecture is doing getting inspired from VGG models and from teh previous works in the collaboration <https://inspirehep.net/literature/1791707>. The produced output is the one shown below, regardless the changes done in the learning rate, in the optimizer used and on the increased number of convolutional layers:
 <img width="1302" alt="Schermata 2020-07-21 alle 19 13 56" src="https://user-images.githubusercontent.com/58489839/88477184-25f5a900-cf3e-11ea-9c68-32056316dce7.png">
 As we can see the netwrok converge to an accuracy percentage around 50% (not at all interesting). 
 ## Test routine
 A simple test routine was implemented, in order to test the programs in the root directory. The process is keep automatized thanks to the usage of TRAVIS CI and its configuration file ```.travis.yml```, and thanks also to coveralls package for the coverage report. Also codacy was used in order to keep track and improve code quality.
-
+## Future improvements
+Under evaluation the possibility to apply a cut on the cosine(zenith), moving therefore from a muon neutrino classification to an up/down classification. Also the possibility to simulate the random noise generated from the surroinding environment and add also this to the classification procedure (start to work on this but some problems found in the simulation procedure with the 1 string configuration detector).
