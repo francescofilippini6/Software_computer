@@ -1,17 +1,9 @@
 import numpy as np
 import h5py
-import pandas as pd
+import os
 import matplotlib.pyplot as plt    # our plotting module
-import pandas as pd    # the main HDF5 reader
-import numpy as np    # must have
-import km3pipe as kp    # some KM3NeT related helper functions
-import seaborn as sns    
-import km3pipe.style
-import scipy.misc
-from PIL import Image
-km3pipe.style.use("km3pipe")
-
-with h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder_mupage/concatenated.h5','r') as hdf:
+path=os.sep.join(os.getcwd().split(os.sep)[:-1])
+with h5py.File(path+'/outputfolder_mupage/concatenated.h5','r') as hdf:
     base_items = list(hdf.items())
     print('Items in the base directory', base_items)
     g2 = np.array(hdf.get('x'))

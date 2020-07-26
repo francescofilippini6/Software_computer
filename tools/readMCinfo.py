@@ -2,10 +2,13 @@ import matplotlib.pyplot as plt
 import pandas as pd   
 import numpy as np    
 import km3pipe as kp    # some KM3NeT related helper functions
+import os
 import km3pipe.style
 km3pipe.style.use("km3pipe")
 
-filepath='/sps/km3net/users/ffilippi/ML/nu_gehen/anu_mu_222.h5'
+#filepath='/nu_gehen/anu_mu_223.h5'
+path=os.sep.join(os.getcwd().split(os.sep)[:-1])
+filepath=path+'/nu_gehen/anu_mu_223.h5'
 info = pd.read_hdf(filepath, '/mc_tracks')
 primaries = info.groupby('group_id').first()
 print(primaries.keys())
