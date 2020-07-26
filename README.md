@@ -23,8 +23,20 @@ For neutrinos were processed 1135 files each containing around 2000 MC events.
 To inspect the .h5 file:
 
 ```ptdump filename.h5```
+
 At this step, in order to inspect physical parameter distribution:
 
 ```tools/readMCinfo.py```
-This will show the statistic of the events contained in the file:
+
+This will show the statistic of the events contained in the file (energy distribution, zenith distribution, position of the hit. direction of the track):
 <img width="1073" alt="Schermata 2020-07-26 alle 11 05 54" src="https://user-images.githubusercontent.com/58489839/88475498-a7463f00-cf30-11ea-9df7-abff91045c9d.png">
+
+At this point we are ready to produce the images, and to bin the data thanks to:
+
+```python binner.py```
+
+We list the previous directories in which are contained our files for neutrinos and muons respectively and all the files are passed to the Orcasong method ```FileBinner``` that produce a new file, marked with "_hist_", stored respectively in /outputfolder_mupage and /outputfolder_neutrino. This method returns also the complete statistic of the events processed and binned, like below:
+<img width="978" alt="Schermata 2020-07-26 alle 11 23 09" src="https://user-images.githubusercontent.com/58489839/88475681-7cf58100-cf32-11ea-9c4c-3259daac61d0.png">
+
+
+
