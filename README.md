@@ -21,4 +21,10 @@ inside /nu_gehen and /mupage_root_files_from_irods folders there are the scripts
 For muons were processed 1030 files each containing around 1500-1800 MC events.
 For neutrinos were processed 1135 files each containing around 2000 MC events.
 To inspect the .h5 file:
+
 ```ptdump filename.h5```
+At this step, in order to inspect physical parameter distribution:
+
+```tools/readMCinfo.py```
+This will show the statistic of the events contained in the file:
+<img width="1073" alt="Schermata 2020-07-26 alle 11 05 54" src="https://user-images.githubusercontent.com/58489839/88475498-a7463f00-cf30-11ea-9df7-abff91045c9d.png">
