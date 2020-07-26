@@ -1,7 +1,5 @@
 import numpy as np
 import sys
-import pandas as pd
-import km3pipe as kp
 from os import listdir, makedirs, getcwd
 from os.path import  join, exists
 from orcasong.core import FileBinner
@@ -11,12 +9,10 @@ from orcasong.tools import FileConcatenator
 
 
 def path_generator(particle):
-    """
-    generating the path of the folders from which taking data and where saving the binned .h5 files:
+    """generating the path of the folders from which taking data and where saving the binned .h5 files:
     0 -> MUONs
     1 -> NEUTRINOs
     """
-    
     general_path=getcwd()+'/'
     directory='o'
     if particle==0:   #taking the external argument  0 = muon

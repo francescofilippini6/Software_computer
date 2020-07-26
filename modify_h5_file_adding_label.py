@@ -1,26 +1,18 @@
 import numpy as np
 import h5py
 import sys
-import pandas as pd    # the main HDF5 reader
 from binner import path_generator
-
-
-
 def filename_gen(particle):
+    """generation of the abs path of the existing file: concatenated and of the possible new one: concatenated_x_y.h5."""
 
-    """
-    generation of the abs path of the existing file: concatenated and of the possible new one: concatenated_x_y.h5
-    """
     filename=path_generator(particle)[1]+'concatenated.h5'
     newfile=path_generator(particle)[1]+'concatenated_x_y.h5'
     
     return filename, newfile
 
 def printfile(particle):
+    """printing some statistics of the datasets in the file."""
 
-    """
-    printing some statistics of the datasets in the file
-    """
     with h5py.File(filename_gen(particle)[0],'r') as hdf:
         base_items = list(hdf.items())
         print('Items in the base directory', base_items)
@@ -29,13 +21,11 @@ def printfile(particle):
         zbins=len(g2[0])
         tbins=len(g2[0][0])
         pmtbins=len(g2[0][0][0])
-        hdf.close()
         return nevt, zbins, tbins, pmtbins
     
 def appendLabelDataset(particle):
-    """
-    appending to concatenated.h5 file a coloumn of labels
-    """
+    """appending to concatenated.h5 file a coloumn of labels."""
+
     with h5py.File(filename_gen(particle)[0],'a') as hdf:
         keys=list(hdf.keys())
         if 'y' in keys:
@@ -54,9 +44,8 @@ def appendLabelDataset(particle):
             return len(yl) 
 
 def newfile(particle):
-    """
-    Can be applied to the original file, or can be called on the newfie function appending however the normalized one
-    """ 
+    """Can be applied to the original file, or can be called on the newfie function appending however the normalized one."""
+ 
     with h5py.File(filename_gen(particle)[0],'r') as hdf:
         g2 = len(hdf['x'])
         if particle==0:

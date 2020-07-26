@@ -5,22 +5,23 @@ from os import getcwd
 from sklearn.model_selection import train_test_split
 from keras.models import Sequential
 from tensorflow.python.client import device_lib
-from keras.layers import Activation, Dropout, Flatten, Dense
-from keras.layers import Dense, Activation, BatchNormalization, Flatten, Conv3D
-from keras.layers import AveragePooling3D, MaxPooling3D,  GlobalAveragePooling3D
-from keras.callbacks import ModelCheckpoint, EarlyStopping, TensorBoard, LambdaCallback
+from keras.layers import Activation, Flatten, Dense
+from keras.layers import Dense, Activation,Flatten, Conv3D
+from keras.layers import  MaxPooling3D,  GlobalAveragePooling3D
+from keras.callbacks import EarlyStopping, TensorBoard, LambdaCallback
 from keras.optimizers import Adam
 from batch_uploader_keras import DataGenerator
 
 #@profile
 def get_available_devices():
-   """to know if training is running on GPUs"""
+   """to know if training is running on GPUs."""
 
    local_device_protos = device_lib.list_local_devices()
    print([x.name for x in local_device_protos])
 #get_available_devices()
 
 def model_constructor(layer):
+   
    """Building a CNN with architecture similar to VGG16 type (smaller)
    Parameters of Conv3D  
    16 -> filter number
@@ -40,7 +41,7 @@ def model_constructor(layer):
       model.add(MaxPooling3D(2, strides=2, name=name_pol_layer))
       min_exit_dimension=(min_exit_dimension-2)/2+1 #dimension after the pooling layer, beying the others-> padding = same
       if min_exit_dimension < 2:
-         raise NameError('Too much layers!!Try with a smaller number')
+         raise NameError('Too much layers!!Try with a smaller number of layers')
    model.add(BatchNormalization())
    model.add(Flatten())
    #model.add(GlobalAveragePooling3D())
@@ -61,8 +62,9 @@ mymodel.compile(optimizer=Adam(learning_rate=0.01),
 
 #@profile
 def batch_uploader_caller():
+   
    """
-   creating the dictionary and position array to be passed to batch_uploader.py -> DataGenerator()
+   creating the dictionary (position : label) and position array=ID to be passed to batch_uploader.py -> DataGenerator()
    reading muon events
    reading the neutrino events
    extracting labels and dimensions

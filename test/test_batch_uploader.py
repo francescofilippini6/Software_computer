@@ -28,15 +28,14 @@ def test_len():
 @settings(max_examples=10,deadline=300)
 @given(value=st.integers())
 def test_data_values(value):
-    """testing the binary behaviour of labels. On a small batch (e.g.=8) we can sample only 1 type of particle (only 0 or 1)"""
+    """testing the binary behaviour of labels. On a small batch (e.g.=8) we can sample only 1 type of particle (only 0 or 1)."""
     if value < a.__len__() and value > 0:
         assert a.__getitem__(value)[1].shape==(a.batch_size,2)
 
 @settings(max_examples=10,deadline=300)
 @given(value=st.integers())
 def test_getitem_dimensions(value):
-    """check of dimensions of the resulting batches of data-> x=images and labels"""
+    """check of dimensions of the resulting batches of data-> x=images and labels."""
     if value < a.__len__() and value > 0:
         assert a.__getitem__(value)[0].shape==(a.batch_size,18,280,31,1)
     
-                
