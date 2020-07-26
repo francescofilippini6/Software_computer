@@ -22,9 +22,9 @@ with h5py.File('/sps/km3net/users/ffilippi/ML/outputfolder_mupage/concatenated.h
     ybins=g2.shape[1]
     xbins=g2.shape[2]
     for i in range(0,nevt):
-        imgplot = plt.imshow(g2[i],cmap="viridis",aspect='auto',origin='lower')
-        #plt.colorbar()
-        #plt.figure(figsize=(3,4))
+        A=np.sum(g2[i],axis = 2)
+        print (A)
+        imgplot = plt.imshow(A,cmap="viridis",aspect='auto',origin='lower')
         name='image'+str(i)+'done.jpg'
         plt.ylabel('z (m)')
         plt.xlabel('time (ns)')
