@@ -29,7 +29,7 @@ At this step, in order to inspect physical parameter distribution of the MC even
 ```tools/readMCinfo.py```
 
 This will show the statistic of the events contained in the file (energy distribution, zenith distribution, position of the hit, direction of the track):
-<img width="1073" alt="Schermata 2020-07-26 alle 11 05 54" src="https://user-images.githubusercontent.com/58489839/88475498-a7463f00-cf30-11ea-9df7-abff91045c9d.png">
+<img width="754" alt="Schermata 2020-07-26 alle 20 01 12" src="https://user-images.githubusercontent.com/58489839/88486016-d2ee1700-cf7a-11ea-8d74-5d96b78acbd2.png">
 
 ### Image creation
 At this point we are ready to produce the images, and to bin the data thanks to:
