@@ -47,5 +47,27 @@ For each event I select the only available informations:
 3. arrival time of the photons on the PMTs.
 The muon pre-fit for a single line is based only on z-time information.
 All the files are then group together in two single files: /outputfolder_mupage/concatenated.h5 and  /outputfolder_neutrino/concatenated.h5, containing respectively 2x10^6 and 2.5x10^6 images.  
-The final set is to create and append a new dataset, called 'y', that represent the label (0 for muon data and 1 for neutrinos):
+Always in the /tools folder the ```plottingImage.py ``` python program is able to create a z-t image to keep in touch with the workflow, as below:
+<img width="650" alt="Schermata 2020-07-26 alle 12 14 14" src="https://user-images.githubusercontent.com/58489839/88476564-93eba180-cf39-11ea-8d5a-3a31097545c2.png">
+
+The final preprocessing step is to create and append a new dataset, called 'y', that represents the label (0 for muon data and 1 for neutrinos):
 ```python modify_h5_file_adding_label.py 0 or 1``` 
+
+## CNN
+
+Due to the large files created (around 2 GB for the muon file and around 3GB for the neutrino one), I soon collide with the problem of fit the final dataset, and all the NN parameters in the RAM of the pc. I built therefore a custom data generator ```batch_uploader_keras.py``` , on the template given @ <https://stanford.edu/~shervine/blog/keras-how-to-generate-data-on-the-fly>, that upload in the RAM only the a batch of the data (=batch_size) per time. Making an observation of the memory usage at Lyon GPU cluster and also at googlecolab, thanks to memory_profiler I in fact observe the folowing:
+<img width="716" alt="Schermata 2020-07-26 alle 12 26 07" src="https://user-images.githubusercontent.com/58489839/88476755-453f0700-cf3b-11ea-8439-ee440815b520.png">
+
+At /tools/memory_profiling.txt there are the instructions for making the memory profiling (Decommit all the @profile decorator, to see the single function memory usage).
+
+### Final results
+For sake of completeness, a previous trial was done with a smaller dataset O(10^5) images, taking into account only the z and time informations for the events. I reported below the architecture used and the accuracy / loss plots (as we can see, even inscreasing the epoch number the network do not converge, reaching however on the training dataset a quite interesting accuracy)
+<img width="804" alt="Schermata 2020-07-26 alle 12 42 57" src="https://user-images.githubusercontent.com/58489839/88477100-9a7c1800-cf3d-11ea-9140-4886f4242f12.png">
+
+For this reason I preprocessed again the data, increasing the number of events and including also the information concerning the channel_id.
+All the trainig steps were done @ google colab, on GPUs, producing this output regardless the changes done in the learning rate, in the optimizer used and on the increased number of convolutional layers:
+<img width="1302" alt="Schermata 2020-07-21 alle 19 13 56" src="https://user-images.githubusercontent.com/58489839/88477184-25f5a900-cf3e-11ea-9c68-32056316dce7.png">
+
+## Test routine
+A simple test routine was implemented, in order to test the programs in the root directory. The process is keep automatized thanks to the usage of TRAVIS CI, and thanks also to coveralls package for the coverage report. Also codacy was used in order to keep track and improve code quality.
+
