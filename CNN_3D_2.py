@@ -44,12 +44,15 @@ def model_constructor(layer):
    #model.add(GlobalAveragePooling3D())
    model.add(Dense(128,activation="relu"))
    model.add(Dense(2,activation='softmax', name='sm'))
+   
    return model
 
 mymodel=model_constructor(3)
 mymodel.compile(optimizer=Adam(learning_rate=0.01),
-              loss='categorical_crossentropy',
-              metrics=['accuracy'])
+                   loss='categorical_crossentropy',
+                   metrics=['accuracy'])
+
+
 
 #@profile
 def batch_uploader_caller():
@@ -60,11 +63,11 @@ def batch_uploader_caller():
    """
    hdf1=h5py.File(getcwd()+'/outputfolder_mupage/concatenated.h5','r')
    labels_m=np.array(hdf1['y'])    
-   labels_mu=labels_m[:1000]
+   labels_mu=labels_m[:1000]  #keep this number small for debug porpuses. At training step increase up to 100 000 or 1 000 000 
    hdf1.close()
    hdf2=h5py.File(getcwd()+'/outputfolder_neutrino/concatenated.h5','r')
    labels_n=np.array(hdf2['y'])    
-   labels_nu=labels_n[:1000]
+   labels_nu=labels_n[:1000]  #keep this number small for debug porpuses. At training step increase up to 100 000 or 1 000 000 
    hdf2.close()
    labels = np.concatenate([labels_mu, labels_nu])
    
