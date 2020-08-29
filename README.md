@@ -84,9 +84,10 @@ After the failures in trying to discriminate between neutrinos and muons, I re-p
 At this point with a simple CNN architecture plus some hidden layers, in ```regression_neutrino.py``` I obtain some interesting results:
 <img width="412" alt="Schermata 2020-08-29 alle 17 05 44" src="https://user-images.githubusercontent.com/58489839/91640203-09a4ca80-ea1c-11ea-8c83-1605419d9477.png">
 Interrupring the training part at the third epoch, I obtain the following:
-<img width="422" alt="Schermata 2020-08-29 alle 17 06 51" src="https://user-images.githubusercontent.com/58489839/91640236-55577400-ea1c-11ea-93c4-d8383f5022af.png">
-Shown only 500 points:
 <img width="923" alt="Schermata 2020-08-29 alle 17 07 07" src="https://user-images.githubusercontent.com/58489839/91640243-5f797280-ea1c-11ea-879e-5947a24e40fe.png">
+
+Shown only 500 points:
+<img width="422" alt="Schermata 2020-08-29 alle 17 06 51" src="https://user-images.githubusercontent.com/58489839/91640236-55577400-ea1c-11ea-93c4-d8383f5022af.png">
 All the predicted ones:
 <img width="410" alt="Schermata 2020-08-29 alle 16 18 34" src="https://user-images.githubusercontent.com/58489839/91640254-7ddf6e00-ea1c-11ea-854c-41fa2497c973.png">
 
