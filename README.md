@@ -78,6 +78,18 @@ For this reason I preprocessed again the data, increasing the number of events a
 All the trainig steps were done @ google colab, on GPUs. The architecture is getting inspired from VGG models and by previous works done by the collaboration <https://inspirehep.net/literature/1791707>. The produced "costant" output is the one shown below, regardless the changes done in the learning rate, in the optimizer used and on the increased number of convolutional layers:
 <img width="1302" alt="Schermata 2020-07-21 alle 19 13 56" src="https://user-images.githubusercontent.com/58489839/88477184-25f5a900-cf3e-11ea-9c68-32056316dce7.png">
 As we can see the netwrok converge to an accuracy percentage around 50% (not at all interesting). Strong evindence seems to point out that the cause of this behaviour are symmetries inside the data, as already anticipated above.
+
+## Regression problem on neutrino direction
+After the failures in trying to discriminate between neutrinos and muons, I re-processed all the data, taking only z-t images. Thanks to the python program ```cos_zenith_label.py```, I was able, for each binned file to attach a label, representing the cosine of the zenith angle of the neutrino direction (thanks to the km3pipe framework developed by the collaboration). 
+At this point with a simple CNN architecture plus some hidden layers, in ```regression_neutrino.py``` I obtain some interesting results:
+<img width="412" alt="Schermata 2020-08-29 alle 17 05 44" src="https://user-images.githubusercontent.com/58489839/91640203-09a4ca80-ea1c-11ea-8c83-1605419d9477.png">
+Interrupring the training part at the third epoch, I obtain the following:
+<img width="422" alt="Schermata 2020-08-29 alle 17 06 51" src="https://user-images.githubusercontent.com/58489839/91640236-55577400-ea1c-11ea-93c4-d8383f5022af.png">
+Shown only 500 points:
+<img width="923" alt="Schermata 2020-08-29 alle 17 07 07" src="https://user-images.githubusercontent.com/58489839/91640243-5f797280-ea1c-11ea-879e-5947a24e40fe.png">
+All the predicted ones:
+<img width="410" alt="Schermata 2020-08-29 alle 16 18 34" src="https://user-images.githubusercontent.com/58489839/91640254-7ddf6e00-ea1c-11ea-854c-41fa2497c973.png">
+
 ## Test routine
 A simple test routine was implemented, in order to test the programs in the root directory. The process is keep automatized thanks to the usage of TRAVIS CI through the configuration file ```.travis.yml```, and thanks also to coveralls package for the coverage report. Also codacy was used in order to keep track and improve code quality (see the badge at the beginning).
 ## Future improvements
