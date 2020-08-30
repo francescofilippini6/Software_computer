@@ -23,11 +23,16 @@ model.add(Conv2D(16, (3,3), strides = (1,1),padding='same', name = 'conv0_0', in
 model.add(Conv2D(16,(3,3), strides=1,padding='same',name='conv0_1'))
 model.add(Activation('relu'))
 model.add(MaxPooling2D((2,2), strides=1, name='max_pool'))
-
+model.add(Dropout(0.25))
+model.add(Conv2D(16, (5,5), strides = (1,1),padding='same', name = 'conv1_0', input_shape = (18,280,1)))
+model.add(Conv2D(16,(5,5), strides=1,padding='same',name='conv1_1'))
+model.add(Activation('relu'))
+model.add(MaxPooling2D((2,2), strides=1, name='max_pool2'))
+model.add(Dropout(0.25))
 
 model.add(Flatten())
 model.add(Dense(32,activation="relu"))
-model.add(Dense(16,activation="relu"))
+model.add(Dense(64,activation="relu"))
 model.add(Dense(1,activation='linear', name='sm'))
 model.compile(optimizer='adam',
               loss='mean_squared_error')
@@ -51,12 +56,12 @@ with h5py.File('/content/drive/My Drive/z-t_colab_2.0/neutrino-concatenated.h5',
 print('shape of the final dataset',X_tr.shape)
 
 batch_size = 32
-nb_epoch = 20
-checkpoint = ModelCheckpoint("best_model.hdf5", monitor='loss', verbose=1,
+nb_epoch = 30
+checkpoint = ModelCheckpoint("best_model.hdf5", monitor='val_loss', verbose=1,
     save_best_only=True, mode='auto', period=1)
 historyy = LossHistory()
 es = EarlyStopping(monitor='val_loss', verbose=1, patience=10)
-cb_list = [historyy, es]
+cb_list = [historyy, es, checkpoint]
 history = model.fit(X_tr, Y_tr,             
           batch_size=batch_size,
           epochs=nb_epoch,
@@ -73,7 +78,7 @@ plt.xlabel('epoch')
 plt.legend(['train', 'validation'], loc='upper left')
 plt.show()
 
-x=np.linspace(0,14063*nb_epoch,14063*nb_epoch)
+x=np.linspace(0,len(historyy.losses),len(historyy.losses))
 plt.plot(historyy.losses,x,'r-', label='loss')
 plt.plot(historyy.val_losses,x,'b-', label='val_loss')
 plt.title('model loss')
@@ -98,8 +103,8 @@ with h5py.File('/content/drive/My Drive/z-t_colab_2.0/neutrino-concatenated.h5',
   plt.xlabel('predicted value')
   plt.figure(figsize=(15,10))
   plt.tight_layout()
-  weights = np.ones_like(Y_predicted) / len(Y_predicted)
-  weights1 = np.ones_like(Y_real) / len(Y_real)
+  #weights = np.ones_like(Y_predicted) / len(Y_predicted)
+  #weights1 = np.ones_like(Y_real) / len(Y_real)
 
   a=np.histogram(y,bins=200)
   b=np.histogram(Y_tra,bins=200)
