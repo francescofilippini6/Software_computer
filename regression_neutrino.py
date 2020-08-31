@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import json
 import h5py
 import os
-from keras.models import Sequential
+from keras.models import Sequential, model_from_json
 from keras.layers import Activation, Dropout, Flatten, Dense
 from keras.layers import Input, Dense, Activation, BatchNormalization, Flatten, Conv2D
 from keras.layers import AveragePooling2D, MaxPooling2D, Dropout, GlobalAveragePooling2D
@@ -24,7 +24,7 @@ model.add(Conv2D(16,(3,3), strides=1,padding='same',name='conv0_1'))
 model.add(Activation('relu'))
 model.add(MaxPooling2D((2,2), strides=1, name='max_pool'))
 model.add(Dropout(0.25))
-model.add(Conv2D(16, (5,5), strides = (1,1),padding='same', name = 'conv1_0', input_shape = (18,280,1)))
+model.add(Conv2D(16, (5,5), strides = (1,1),padding='same', name = 'conv1_0'))
 model.add(Conv2D(16,(5,5), strides=1,padding='same',name='conv1_1'))
 model.add(Activation('relu'))
 model.add(MaxPooling2D((2,2), strides=1, name='max_pool2'))
@@ -50,8 +50,8 @@ X_tr=[]
 Y_tr=[]
 
 with h5py.File('/content/drive/My Drive/z-t_colab_2.0/neutrino-concatenated.h5','r') as hdf:
-    X_tr = np.array(hdf['x'][:600000]).reshape(600000,18,280,1)
-    Y_tr = np.array(hdf['y'][:600000]).reshape(600000,1)
+    X_tr = np.array(hdf['x'][:900000]).reshape(900000,18,280,1)
+    Y_tr = np.array(hdf['y'][:900000]).reshape(900000,1)
     hdf.close()
 print('shape of the final dataset',X_tr.shape)
 
@@ -69,7 +69,9 @@ history = model.fit(X_tr, Y_tr,
           shuffle=True,
           verbose=1,
           callbacks=cb_list)
-
+#-------------------------------------------------
+#plotting val_loss and loss value registered at each epoch end
+#-------------------------------------------------
 plt.plot(history.history['loss'])
 plt.plot(history.history['val_loss'])
 plt.title('model loss')
@@ -77,6 +79,9 @@ plt.ylabel('loss')
 plt.xlabel('epoch')
 plt.legend(['train', 'validation'], loc='upper left')
 plt.show()
+#-------------------------------------------------
+#plotting loss and val_loss values registered at each batch end
+#-------------------------------------------------
 
 x=np.linspace(0,len(historyy.losses),len(historyy.losses))
 plt.plot(historyy.losses,x,'r-', label='loss')
@@ -86,7 +91,9 @@ plt.ylabel('loss value')
 plt.xlabel('epochs')
 plt.legend(loc='best')
 #plt.savefig('loss_each_epoch_end.png')
-
+#-------------------------------------------------
+#predicting the labels of 100.000 events and plot predicted vs MonteCarlo(real) value
+#-------------------------------------------------
 with h5py.File('/content/drive/My Drive/z-t_colab_2.0/neutrino-concatenated.h5','r') as hdfa:
   X_predict = np.array(hdfa['x'][600001:700001]).reshape(100000,18,280,1)
   Y_predict=model.predict(X_tra)
@@ -120,4 +127,17 @@ with h5py.File('/content/drive/My Drive/z-t_colab_2.0/neutrino-concatenated.h5',
   from scipy.stats import chisquare
   c=chisquare(a[0], f_exp=b[0])
   print(c[0])
-model.save_weights("model.h5")
+#model.save_weights("model.h5")
+model_json = model.to_json()
+with open("model.json", "w") as json_file:
+    json_file.write(model_json)
+#-------------------------------------------------
+#loading the model and weights
+#-------------------------------------------------
+#json_file = open('model.json', 'r')
+#loaded_model_json = json_file.read()
+#json_file.close()
+#loaded_model = model_from_json(loaded_model_json)
+# load weights into new model
+#loaded_model.load_weights("best_model.hdf5")
+#loaded_model.compile(optimizer='adam',loss='mean_squared_error')
