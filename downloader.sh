@@ -18,3 +18,15 @@ curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid_
 curl -Lb ./cookie "https://drive.google.com/uc?export=download&confirm=`awk '/download/ {print $NF}' ./cookie`&id=${fileid_neutrino}" -o ${filename_neutrino}
 rm cookie
 cd ..
+
+
+cd zenith_regression 
+
+
+fileid_regression='1viO_NmtA3w7SoeTqgXvoiQVUC5BccSYf'
+filename_regression="neutrino-concatenated.h5"
+curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid_regression}" > /dev/null
+curl -Lb ./cookie "https://drive.google.com/uc?export=download&confirm=`awk '/download/ {print $NF}' ./cookie`&id=${fileid_regression}" -o ${filename_regression}
+rm cookie
+cd ..
+
