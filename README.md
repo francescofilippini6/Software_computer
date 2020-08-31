@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/francescofilippini6/Software_computer.svg?branch=master)](https://travis-ci.org/francescofilippini6/Software_computer)
 [![Coverage Status](https://coveralls.io/repos/github/francescofilippini6/Software_computer/badge.svg?branch=master)](https://coveralls.io/github/francescofilippini6/Software_computer?branch=master)
 
-Use and development of libraries implemented by KM3NeT collaboration for Machine Learning. Build of a CNN for discrimination between atmospheric muons (background) and neutrinos. Further informations:
+Use and development of libraries implemented by KM3NeT collaboration for Machine Learning. Build of a CNN for discrimination between atmospheric muons (background) and neutrinos and for neutrino zenith reconstruction. Further informations:
 
 <https://git.km3net.de/ml/OrcaSong>
 
@@ -14,8 +14,9 @@ The main feature of this work is the training of a CNN with a single string dete
 ## Data inspection
 Considering the angular distribution of the events, neutrinos come from all the directions of the sky, traversing also all the Earth, and interacting at the rock at the base of the detector. Muons, at the contrary, are not able to traverse large amount of rock and therefore in KM3NeT these particles produce events coming only from the hemisphere over the detector itself (superposition of muon and neutrino events coming from above).
 Previous works by the collaboration tried to make the identification without applying any zenithy cuts, but based on data simulated for a more complex detector configuration (4 strings and 115 strings configuration). In this work I follow the same workflow (no zenithy selection), but inside simulated data in single string configuration we have lots of symmetries on the signature of the events that cannot be disentagled due to the peculiar detector configuration. For this reason the final accuracy of the network on both the training and validation data, stucks at around 50-55 %, even changing hyperparameters (learning rate, optimizers, varying the architecture...)further info at the end.
+For what concern the regression part on the zenith angle for neutrino direction, some results are shown for the one string configuration.
 ## Preliminary steps - Quick start
-Git doesn't allow to upload files of large dimensions (even the extension LFS).The two files needed are around 2GB and 3GB. Those here in the git folder are dummy ones created for testing and debug pourposes.
+Git doesn't allow to upload files of large dimensions (even the extension LFS).The files needed are around 2GB and 3GB. Those here in the git folder are dummy ones created for testing and debug pourposes.
 
 ```clone the directory in a local folder```
 
@@ -70,7 +71,7 @@ Due to the large files created (around 2 GB for the muon file and around 3GB for
 
 @ **/tools/memory_profiling.txt** there are the instructions for making the memory profiling (Uncomment all the @profile decorator, to see the single function memory usage).
 
-### Final results
+### Final results neutrino/muon discrimination
 For sake of completeness, a previous trial was done with a smaller dataset O(10^5) images, taking into account only the z and time informations for the events. I reported below the architecture used and the accuracy - loss plots produced by ```tools/plot_history.py```. As we can see, even inscreasing the epoch number the network do not converge, reaching however on the training dataset a quite interesting accuracy.
 <img width="804" alt="Schermata 2020-07-26 alle 12 42 57" src="https://user-images.githubusercontent.com/58489839/88477100-9a7c1800-cf3d-11ea-9140-4886f4242f12.png">
 
@@ -80,15 +81,15 @@ All the trainig steps were done @ google colab, on GPUs. The architecture is get
 As we can see the netwrok converge to an accuracy percentage around 50% (not at all interesting). Strong evindence seems to point out that the cause of this behaviour are symmetries inside the data, as already anticipated above.
 
 ## Regression problem on neutrino direction
-After the failures in trying to discriminate between neutrinos and muons, I re-processed all the data, taking only z-t images. Thanks to the python program ```cos_zenith_label.py```, I was able, for each binned file to attach a label, representing the cosine of the zenith angle of the neutrino direction (thanks to the km3pipe framework developed by the collaboration). 
-At this point with a simple CNN architecture plus some hidden layers, in ```regression_neutrino.py``` I obtain some interesting results:
+After the failures in trying to discriminate between neutrinos and muons, I re-processed all the data, taking only z-t images. Thanks to the python program ```zenith_regression/cos_zenith_label.py```, I was able, for each binned file to attach a label, representing the cosine of the zenith angle of the neutrino direction (thanks to the km3pipe framework developed by the collaboration). 
+At this point with a simple CNN architecture plus some hidden layers, in ```zenith_regression/regression_neutrino.py``` I obtain some interesting results:
 <img width="412" alt="Schermata 2020-08-29 alle 17 05 44" src="https://user-images.githubusercontent.com/58489839/91640203-09a4ca80-ea1c-11ea-8c83-1605419d9477.png">
-Interrupring the training part at the third epoch, I obtain the following:
+Saving the weights in correspondence of the min validation loss, and reused it in the model we can predict some values and compare it to the MonteCarlo distribution:
 <img width="923" alt="Schermata 2020-08-29 alle 17 07 07" src="https://user-images.githubusercontent.com/58489839/91640243-5f797280-ea1c-11ea-879e-5947a24e40fe.png">
 
-Shown only 500 points:
+Putting the point predicted and the real one in a scatter plot we obtain (shown only 500 points):
 <img width="422" alt="Schermata 2020-08-29 alle 17 06 51" src="https://user-images.githubusercontent.com/58489839/91640236-55577400-ea1c-11ea-93c4-d8383f5022af.png">
-All the predicted ones:
+and with a 2D representation all the predicted ones:
 <img width="410" alt="Schermata 2020-08-29 alle 16 18 34" src="https://user-images.githubusercontent.com/58489839/91640254-7ddf6e00-ea1c-11ea-854c-41fa2497c973.png">
 
 ## Test routine
