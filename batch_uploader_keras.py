@@ -61,10 +61,11 @@ class DataGenerator(keras.utils.Sequence):
     for i, ID in enumerate(list_IDs_temp):
       # Store sample
       pos = int("".join(filter(str.isdigit, ID)))
-      if pos < len(self.filelist[0]):
+      particle_type = ID.split('_')[0]
+      if particle_type=='mu':
         X[i,]=(np.divide(np.array(self.filelist[0]['x'][pos]),255)).reshape(18,280,31,1)
       else:
-        X[i,]=(np.divide(np.array(self.filelist[1]['x'][pos-(len(self.filelist[0]))]),255)).reshape(18,280,31,1)
+        X[i,]=(np.divide(np.array(self.filelist[1]['x'][pos]),255)).reshape(18,280,31,1)
         
       # Store class
       y[i] = self.labels[ID]

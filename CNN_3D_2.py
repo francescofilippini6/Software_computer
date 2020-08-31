@@ -62,20 +62,20 @@ def batch_uploader_caller():
    extracting labels and dimensions
    """
    hdf1=h5py.File(getcwd()+'/outputfolder_mupage/concatenated.h5','r')
-   labels_m=np.array(hdf1['y'])    
-   labels_mu=labels_m[:1000]  #keep this number small for debug porpuses. At training step increase up to 100 000 or 1 000 000 
+   labels_mu=np.array(hdf1['y'])[:1000]  #keep this number small for debug porpuses. At training step increase up to 100 000 or 1 000 000 
    hdf1.close()
    hdf2=h5py.File(getcwd()+'/outputfolder_neutrino/concatenated.h5','r')
-   labels_n=np.array(hdf2['y'])    
-   labels_nu=labels_n[:1000]  #keep this number small for debug porpuses. At training step increase up to 100 000 or 1 000 000 
+   labels_nu=np.array(hdf2['y'])[:1000]  #keep this number small for debug porpuses. At training step increase up to 100 000 or 1 000 000    
    hdf2.close()
    labels = np.concatenate([labels_mu, labels_nu])
    
    group_id=[]
-   for x in range(0,(len(labels_nu)+len(labels_mu))):
-      name='id_'+str(x)
+   for x in range(0,len(labels_mu)):
+      name='mu_'+str(x)
       group_id.append(name)
-      
+   for x in range(0,len(labels_nu)):
+      name='nu_'+str(x)
+      group_id.append(name)      
   
    labelsa ={group_id[i]:labels[i] for i in range(len(group_id))} 
   
