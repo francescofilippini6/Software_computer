@@ -19,21 +19,31 @@ model = Sequential()
                  strides -> step of the cnn
                  input shape -> (batch size, channels, rows,cols)
 """
-model.add(Conv2D(16, (3,3), strides = (1,1),padding='same', name = 'conv0_0', input_shape = (18,280,1)))
-model.add(Conv2D(16,(3,3), strides=1,padding='same',name='conv0_1'))
+model.add(Conv2D(8, (3,3), strides = (1,1),padding='same', name = 'conv0_0', input_shape = (18,280,1)))
+model.add(Conv2D(8,(3,3), strides=1,padding='same',name='conv0_1'))
+model.add(Conv2D(8,(3,3), strides=1,padding='same',name='conv0_2'))
+model.add(Conv2D(8,(3,3), strides=1,padding='same',name='conv0_3'))
+model.add(BatchNormalization())
 model.add(Activation('relu'))
 model.add(MaxPooling2D((2,2), strides=1, name='max_pool'))
-model.add(Conv2D(32, (5,5), strides = (1,1),padding='same', name = 'conv1_0'))
-model.add(Conv2D(32, (5,5), strides = (1,1),padding='same',name='conv1_1'))
-#model.add(BatchNormalization())
+model.add(Dropout(0.25))
+
+
+model.add(Conv2D(16, (5,5), strides = (1,1),padding='same', name = 'conv1_0'))
+model.add(Conv2D(16, (5,5), strides = (1,1),padding='same',name='conv1_1'))
+model.add(Conv2D(16, (5,5), strides = (1,1),padding='same', name = 'conv1_2'))
+model.add(Conv2D(16, (5,5), strides = (1,1),padding='same', name = 'conv1_3'))
+model.add(BatchNormalization())
 model.add(Activation('relu'))
 model.add(MaxPooling2D((2,2), strides=1, name='max_pool2'))
 model.add(Dropout(0.25))
 
 model.add(Flatten())
+model.add(Dense(64,activation="relu"))
+model.add(Dropout())
 model.add(Dense(32,activation="relu"))
-model.add(Dense(16,activation="relu"))
-model.add(Dense(1,activation='linear', name='sm'))
+#model.add(Dense(1,activation='linear', name='sm'))
+model.add(Dense(1,activation='softsign', name='sm'))
 model.compile(optimizer='adam',
               loss='mean_squared_error')
 
@@ -125,7 +135,7 @@ with h5py.File('/content/drive/My Drive/z-t_colab_2.0/neutrino-concatenated.h5',
   plt.legend()
   from scipy.stats import chisquare
   c=chisquare(a[0], f_exp=b[0])
-  print(c[0])
+  print("CHISQUARE:",c[0])
 #--------------------------------------------------------
 #to save model (weights saved from callback checkpoint
 #--------------------------------------------------------
