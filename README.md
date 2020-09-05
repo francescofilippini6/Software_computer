@@ -82,17 +82,17 @@ As we can see the netwrok converge to an accuracy percentage around 50% (not at 
 
 ## Regression problem on neutrino direction
 After the failures in trying to discriminate between neutrinos and muons, I re-processed all the data, taking only z-t images. Thanks to the python program ```zenith_regression/cos_zenith_label.py```, I was able, for each binned file to attach a label, representing the cosine of the zenith angle of the neutrino direction (thanks to the km3pipe framework developed by the collaboration). 
-At this point with a simple CNN architecture plus some hidden layers, in ```zenith_regression/regression_neutrino.py``` I obtain some interesting results:
-<img width="412" alt="Schermata 2020-08-31 alle 19 25 18" src="https://user-images.githubusercontent.com/58489839/91748616-896b9a00-ebc0-11ea-9fcd-dae708a5d5d0.png">
+At this point with a simple CNN architecture plus some hidden layers, in ```zenith_regression/regression_neutrino.py``` I obtain some interesting results (the activation function of the last layer is a softsign due to restrict the range in (-1,1) as the cosine itself):
+<img width="401" alt="Schermata 2020-09-02 alle 17 52 07" src="https://user-images.githubusercontent.com/58489839/92300935-6db91880-ef5f-11ea-9c8f-f947c0289c8d.png">
 
 Saving the weights in correspondence of the min validation loss, and reused it in the model we can predict some values and compare it to the MonteCarlo distribution:
-<img width="944" alt="Schermata 2020-08-31 alle 19 27 42" src="https://user-images.githubusercontent.com/58489839/91748573-75c03380-ebc0-11ea-9968-b1fe118a45a8.png">
+<img width="951" alt="Schermata 2020-09-02 alle 21 54 25" src="https://user-images.githubusercontent.com/58489839/92300912-29c61380-ef5f-11ea-98d0-76dc50d8cb44.png">
 
 
 Putting the point predicted and the real one in a scatter plot we obtain (shown only 500 points):
-<img width="430" alt="Schermata 2020-08-31 alle 19 27 26" src="https://user-images.githubusercontent.com/58489839/91748650-9a1c1000-ebc0-11ea-83f5-b16ea0afe103.png">
+<img width="432" alt="Schermata 2020-09-02 alle 21 55 14" src="https://user-images.githubusercontent.com/58489839/92300920-45c9b500-ef5f-11ea-9d48-ab3fa66061c3.png">
 and with a 2D representation all the predicted ones:
-<img width="427" alt="Schermata 2020-08-31 alle 19 29 08" src="https://user-images.githubusercontent.com/58489839/91748691-a7d19580-ebc0-11ea-8d56-d73c0b4a71c7.png">
+<img width="441" alt="Schermata 2020-09-02 alle 21 54 08" src="https://user-images.githubusercontent.com/58489839/92300927-5b3edf00-ef5f-11ea-990f-3092521d7682.png">
 
 ## Test routine
 A simple test routine was implemented, in order to test the programs in the root directory. The process is keep automatized thanks to the usage of TRAVIS CI through the configuration file ```.travis.yml```, and thanks also to coveralls package for the coverage report. Also codacy was used in order to keep track and improve code quality (see the badge at the beginning).
